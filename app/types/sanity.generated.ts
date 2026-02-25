@@ -608,7 +608,7 @@ export type ARTICLE_QUERY_RESULT = {
 
 // Source: app/sanity/queries.ts
 // Variable: HOME_TOWER_QUERY
-// Query: *[_type == "tower" && slug.current == "/"][0]{  _id,  _type,  title,  slug,  blocks[]{      _key,  _type,  internalTitle,  blockSpacing,  disabled,  hideWhen,  backgroundColor,  paddingTop,  paddingBottom,  // Copy block fields  body,  // Media block fields  media{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  caption,  aspectRatio,  eyebrow,  heading,  cards[]{      _key,  image{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  eyebrow,  title,  subtitle,  buttonText,  buttonHref  },  // Spacer block fields  size,  // Reusable block reference - dereference and fetch nested blocks  reusableBlock->{    _id,    _type,    title,    blocks[]{        _key,  _type,  internalTitle,  blockSpacing,  disabled,  hideWhen,  backgroundColor,  paddingTop,  paddingBottom,  // Copy block fields  body,  // Media block fields  media{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  caption,  aspectRatio,  // Stacked carousel / Full card block fields  eyebrow,  heading,  cards[]{      _key,  image{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  eyebrow,  title,  subtitle,  buttonText,  buttonHref  },  // Topics grid block fields  topics[]->{    _id,    title,    slug,    description,    image{      asset->{        _id,        url      },      hotspot,      crop    }  },  // Spacer block fields  size,  // Essentials articles block fields  categorySlug    }  }  }}
+// Query: *[_type == "tower" && slug.current == "/"][0]{  _id,  _type,  title,  slug,  blocks[]{      _key,  _type,  internalTitle,  blockSpacing,  disabled,  hideWhen,  backgroundColor,  paddingTop,  paddingBottom,  // Copy block fields  body,  // Media block fields  media{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  caption,  aspectRatio,  eyebrow,  heading,  cards[]{      _key,  image{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  eyebrow,  title,  subtitle,  buttonText,  buttonHref  },  // Spacer block fields  size,  // Form block fields  formName,  submitText,  successMessage,  fields[]{    _key,    label,    name,    type,    placeholder,    required,    options  },  // Reusable block reference - dereference and fetch nested blocks  reusableBlock->{    _id,    _type,    title,    blocks[]{        _key,  _type,  internalTitle,  blockSpacing,  disabled,  hideWhen,  backgroundColor,  paddingTop,  paddingBottom,  // Copy block fields  body,  // Media block fields  media{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  caption,  aspectRatio,  // Stacked carousel / Full card block fields  eyebrow,  heading,  cards[]{      _key,  image{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  eyebrow,  title,  subtitle,  buttonText,  buttonHref  },  // Topics grid block fields  topics[]->{    _id,    title,    slug,    description,    image{      asset->{        _id,        url      },      hotspot,      crop    }  },  // Spacer block fields  size,  // Essentials articles block fields  categorySlug,  // Form block fields  formName,  submitText,  successMessage,  fields[]{    _key,    label,    name,    type,    placeholder,    required,    options  }    }  }  }}
 export type HOME_TOWER_QUERY_RESULT = {
   _id: string;
   _type: "tower";
@@ -657,6 +657,10 @@ export type HOME_TOWER_QUERY_RESULT = {
           buttonHref: string | null;
         }> | null;
         size: null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: null;
       }
     | {
@@ -701,6 +705,10 @@ export type HOME_TOWER_QUERY_RESULT = {
           buttonHref: string | null;
         }> | null;
         size: null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: null;
       }
     | {
@@ -759,6 +767,10 @@ export type HOME_TOWER_QUERY_RESULT = {
         heading: null;
         cards: null;
         size: null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: null;
       }
     | {
@@ -779,6 +791,18 @@ export type HOME_TOWER_QUERY_RESULT = {
         heading: string | null;
         cards: null;
         size: null;
+        formName: string | null;
+        submitText: string | null;
+        successMessage: string | null;
+        fields: Array<{
+          _key: string;
+          label: string | null;
+          name: string | null;
+          type: "email" | "select" | "tel" | "text" | "textarea" | null;
+          placeholder: string | null;
+          required: boolean | null;
+          options: Array<string> | null;
+        }> | null;
         reusableBlock: null;
       }
     | {
@@ -815,6 +839,10 @@ export type HOME_TOWER_QUERY_RESULT = {
         heading: null;
         cards: null;
         size: null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: null;
       }
     | {
@@ -835,6 +863,10 @@ export type HOME_TOWER_QUERY_RESULT = {
         heading: null;
         cards: null;
         size: null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: {
           _id: string;
           _type: "reusableBlock";
@@ -896,6 +928,10 @@ export type HOME_TOWER_QUERY_RESULT = {
                 topics: null;
                 size: null;
                 categorySlug: null;
+                formName: null;
+                submitText: null;
+                successMessage: null;
+                fields: null;
               }
             | {
                 _key: string;
@@ -953,6 +989,10 @@ export type HOME_TOWER_QUERY_RESULT = {
                 topics: null;
                 size: null;
                 categorySlug: null;
+                formName: null;
+                submitText: null;
+                successMessage: null;
+                fields: null;
               }
             | {
                 _key: string;
@@ -1024,6 +1064,10 @@ export type HOME_TOWER_QUERY_RESULT = {
                 topics: null;
                 size: null;
                 categorySlug: null;
+                formName: null;
+                submitText: null;
+                successMessage: null;
+                fields: null;
               }
             | {
                 _key: string;
@@ -1073,6 +1117,10 @@ export type HOME_TOWER_QUERY_RESULT = {
                 topics: null;
                 size: null;
                 categorySlug: null;
+                formName: null;
+                submitText: null;
+                successMessage: null;
+                fields: null;
               }
             | {
                 _key: string;
@@ -1094,6 +1142,10 @@ export type HOME_TOWER_QUERY_RESULT = {
                 topics: null;
                 size: "large" | "medium" | "small" | null;
                 categorySlug: null;
+                formName: null;
+                submitText: null;
+                successMessage: null;
+                fields: null;
               }
           > | null;
         } | null;
@@ -1116,6 +1168,10 @@ export type HOME_TOWER_QUERY_RESULT = {
         heading: null;
         cards: null;
         size: "large" | "medium" | "small" | null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: null;
       }
   > | null;
@@ -1123,7 +1179,7 @@ export type HOME_TOWER_QUERY_RESULT = {
 
 // Source: app/sanity/queries.ts
 // Variable: TOWER_QUERY
-// Query: *[_type == "tower" && slug.current == $tower][0]{  _id,  _type,  title,  slug,  blocks[]{      _key,  _type,  internalTitle,  blockSpacing,  disabled,  hideWhen,  backgroundColor,  paddingTop,  paddingBottom,  // Copy block fields  body,  // Media block fields  media{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  caption,  aspectRatio,  eyebrow,  heading,  cards[]{      _key,  image{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  eyebrow,  title,  subtitle,  buttonText,  buttonHref  },  // Spacer block fields  size,  // Reusable block reference - dereference and fetch nested blocks  reusableBlock->{    _id,    _type,    title,    blocks[]{        _key,  _type,  internalTitle,  blockSpacing,  disabled,  hideWhen,  backgroundColor,  paddingTop,  paddingBottom,  // Copy block fields  body,  // Media block fields  media{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  caption,  aspectRatio,  // Stacked carousel / Full card block fields  eyebrow,  heading,  cards[]{      _key,  image{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  eyebrow,  title,  subtitle,  buttonText,  buttonHref  },  // Topics grid block fields  topics[]->{    _id,    title,    slug,    description,    image{      asset->{        _id,        url      },      hotspot,      crop    }  },  // Spacer block fields  size,  // Essentials articles block fields  categorySlug    }  }  }}
+// Query: *[_type == "tower" && slug.current == $tower][0]{  _id,  _type,  title,  slug,  blocks[]{      _key,  _type,  internalTitle,  blockSpacing,  disabled,  hideWhen,  backgroundColor,  paddingTop,  paddingBottom,  // Copy block fields  body,  // Media block fields  media{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  caption,  aspectRatio,  eyebrow,  heading,  cards[]{      _key,  image{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  eyebrow,  title,  subtitle,  buttonText,  buttonHref  },  // Spacer block fields  size,  // Form block fields  formName,  submitText,  successMessage,  fields[]{    _key,    label,    name,    type,    placeholder,    required,    options  },  // Reusable block reference - dereference and fetch nested blocks  reusableBlock->{    _id,    _type,    title,    blocks[]{        _key,  _type,  internalTitle,  blockSpacing,  disabled,  hideWhen,  backgroundColor,  paddingTop,  paddingBottom,  // Copy block fields  body,  // Media block fields  media{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  caption,  aspectRatio,  // Stacked carousel / Full card block fields  eyebrow,  heading,  cards[]{      _key,  image{    image{      asset->{        _id,        url      },      hotspot,      crop    },    video{      asset->{        _id,        url      }    },    alt  },  eyebrow,  title,  subtitle,  buttonText,  buttonHref  },  // Topics grid block fields  topics[]->{    _id,    title,    slug,    description,    image{      asset->{        _id,        url      },      hotspot,      crop    }  },  // Spacer block fields  size,  // Essentials articles block fields  categorySlug,  // Form block fields  formName,  submitText,  successMessage,  fields[]{    _key,    label,    name,    type,    placeholder,    required,    options  }    }  }  }}
 export type TOWER_QUERY_RESULT = {
   _id: string;
   _type: "tower";
@@ -1172,6 +1228,10 @@ export type TOWER_QUERY_RESULT = {
           buttonHref: string | null;
         }> | null;
         size: null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: null;
       }
     | {
@@ -1216,6 +1276,10 @@ export type TOWER_QUERY_RESULT = {
           buttonHref: string | null;
         }> | null;
         size: null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: null;
       }
     | {
@@ -1274,6 +1338,10 @@ export type TOWER_QUERY_RESULT = {
         heading: null;
         cards: null;
         size: null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: null;
       }
     | {
@@ -1294,6 +1362,18 @@ export type TOWER_QUERY_RESULT = {
         heading: string | null;
         cards: null;
         size: null;
+        formName: string | null;
+        submitText: string | null;
+        successMessage: string | null;
+        fields: Array<{
+          _key: string;
+          label: string | null;
+          name: string | null;
+          type: "email" | "select" | "tel" | "text" | "textarea" | null;
+          placeholder: string | null;
+          required: boolean | null;
+          options: Array<string> | null;
+        }> | null;
         reusableBlock: null;
       }
     | {
@@ -1330,6 +1410,10 @@ export type TOWER_QUERY_RESULT = {
         heading: null;
         cards: null;
         size: null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: null;
       }
     | {
@@ -1350,6 +1434,10 @@ export type TOWER_QUERY_RESULT = {
         heading: null;
         cards: null;
         size: null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: {
           _id: string;
           _type: "reusableBlock";
@@ -1411,6 +1499,10 @@ export type TOWER_QUERY_RESULT = {
                 topics: null;
                 size: null;
                 categorySlug: null;
+                formName: null;
+                submitText: null;
+                successMessage: null;
+                fields: null;
               }
             | {
                 _key: string;
@@ -1468,6 +1560,10 @@ export type TOWER_QUERY_RESULT = {
                 topics: null;
                 size: null;
                 categorySlug: null;
+                formName: null;
+                submitText: null;
+                successMessage: null;
+                fields: null;
               }
             | {
                 _key: string;
@@ -1539,6 +1635,10 @@ export type TOWER_QUERY_RESULT = {
                 topics: null;
                 size: null;
                 categorySlug: null;
+                formName: null;
+                submitText: null;
+                successMessage: null;
+                fields: null;
               }
             | {
                 _key: string;
@@ -1588,6 +1688,10 @@ export type TOWER_QUERY_RESULT = {
                 topics: null;
                 size: null;
                 categorySlug: null;
+                formName: null;
+                submitText: null;
+                successMessage: null;
+                fields: null;
               }
             | {
                 _key: string;
@@ -1609,6 +1713,10 @@ export type TOWER_QUERY_RESULT = {
                 topics: null;
                 size: "large" | "medium" | "small" | null;
                 categorySlug: null;
+                formName: null;
+                submitText: null;
+                successMessage: null;
+                fields: null;
               }
           > | null;
         } | null;
@@ -1631,6 +1739,10 @@ export type TOWER_QUERY_RESULT = {
         heading: null;
         cards: null;
         size: "large" | "medium" | "small" | null;
+        formName: null;
+        submitText: null;
+        successMessage: null;
+        fields: null;
         reusableBlock: null;
       }
   > | null;
@@ -1650,8 +1762,8 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '*[_id == "settings"][0]{ siteTitle, navLinks[]{ text, href } }': SETTINGS_QUERY_RESULT;
     '*[_type == "article" && slug.current == $article][0]{ title, content }': ARTICLE_QUERY_RESULT;
-    '*[_type == "tower" && slug.current == "/"][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  blocks[]{\n    \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Spacer block fields\n  size,\n  // Reusable block reference - dereference and fetch nested blocks\n  reusableBlock->{\n    _id,\n    _type,\n    title,\n    blocks[]{\n      \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  // Stacked carousel / Full card block fields\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Topics grid block fields\n  topics[]->{\n    _id,\n    title,\n    slug,\n    description,\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    }\n  },\n  // Spacer block fields\n  size,\n  // Essentials articles block fields\n  categorySlug\n\n    }\n  }\n\n  }\n}': HOME_TOWER_QUERY_RESULT;
-    '*[_type == "tower" && slug.current == $tower][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  blocks[]{\n    \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Spacer block fields\n  size,\n  // Reusable block reference - dereference and fetch nested blocks\n  reusableBlock->{\n    _id,\n    _type,\n    title,\n    blocks[]{\n      \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  // Stacked carousel / Full card block fields\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Topics grid block fields\n  topics[]->{\n    _id,\n    title,\n    slug,\n    description,\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    }\n  },\n  // Spacer block fields\n  size,\n  // Essentials articles block fields\n  categorySlug\n\n    }\n  }\n\n  }\n}': TOWER_QUERY_RESULT;
+    '*[_type == "tower" && slug.current == "/"][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  blocks[]{\n    \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Spacer block fields\n  size,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  },\n  // Reusable block reference - dereference and fetch nested blocks\n  reusableBlock->{\n    _id,\n    _type,\n    title,\n    blocks[]{\n      \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  // Stacked carousel / Full card block fields\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Topics grid block fields\n  topics[]->{\n    _id,\n    title,\n    slug,\n    description,\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    }\n  },\n  // Spacer block fields\n  size,\n  // Essentials articles block fields\n  categorySlug,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  }\n\n    }\n  }\n\n  }\n}': HOME_TOWER_QUERY_RESULT;
+    '*[_type == "tower" && slug.current == $tower][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  blocks[]{\n    \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Spacer block fields\n  size,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  },\n  // Reusable block reference - dereference and fetch nested blocks\n  reusableBlock->{\n    _id,\n    _type,\n    title,\n    blocks[]{\n      \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  // Stacked carousel / Full card block fields\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Topics grid block fields\n  topics[]->{\n    _id,\n    title,\n    slug,\n    description,\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    }\n  },\n  // Spacer block fields\n  size,\n  // Essentials articles block fields\n  categorySlug,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  }\n\n    }\n  }\n\n  }\n}': TOWER_QUERY_RESULT;
     '*[_type == "reusableBlock"]{ _id, title }': ALL_REUSABLE_BLOCKS_QUERY_RESULT;
   }
 }
