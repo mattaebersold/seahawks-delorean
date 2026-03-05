@@ -12,8 +12,8 @@ import { defaultDocumentNode, structure } from "~/sanity/structure";
 
 export default defineConfig({
   ...projectDetails(),
-  name: "seahawks-delorean",
-  title: "Seahawks DeLorean",
+  name: "IN2TIME",
+  title: "IN2TIME",
   plugins: [
     structureTool({ structure, defaultDocumentNode }),
     presentationTool({

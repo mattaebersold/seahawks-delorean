@@ -8,6 +8,13 @@ export const settingsSchema = defineType({
   icon: Settings,
   fields: [
     defineField({
+      name: "logo",
+      title: "Logo",
+      description: "Displayed in the site header. SVG or PNG with transparency recommended.",
+      type: "image",
+      options: { hotspot: false },
+    }),
+    defineField({
       name: "siteTitle",
       description: "Displayed in header, footer and in meta tags",
       type: "string",

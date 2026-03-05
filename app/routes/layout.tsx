@@ -1,7 +1,7 @@
 import { useQuery } from "@sanity/react-loader";
 import { VisualEditing } from "@sanity/visual-editing/react-router";
 import { lazy, Suspense, useEffect } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router";
+import { Outlet, useLocation } from "react-router";
 
 import { Header } from "~/components/layout/Header";
 import { Footer } from "~/components/layout/Footer";
@@ -51,9 +51,8 @@ function WebsiteContent({ loaderData }: Route.ComponentProps) {
   const { data } = useQuery<typeof initial.data>(query, params, {
     initial,
   });
-  const { name, hydrate } = useUserStore();
+  const { hydrate } = useUserStore();
   const location = useLocation();
-  const resetNavigate = useNavigate();
 
   
   // Hydrate store from localStorage on mount
@@ -65,8 +64,11 @@ function WebsiteContent({ loaderData }: Route.ComponentProps) {
     <>
 
       <div>
-        <Header title={data?.siteTitle} navLinks={data?.navLinks} />
-        <Outlet />
+        <Header title={data?.siteTitle} logoUrl={data?.logo?.asset?.url ?? null} />
+        {/* Non-home pages need top padding to clear the fixed header */}
+        <div className={location.pathname !== "/" ? "pt-header" : ""}>
+          <Outlet />
+        </div>
         <Footer />
       </div>
 

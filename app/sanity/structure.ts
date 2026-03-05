@@ -8,6 +8,20 @@ export const structure: StructureResolver = (S) =>
     .id("root")
     .title("Content")
     .items([
+      // Home Page singleton — direct editor
+      S.listItem()
+        .id("homePage")
+        .schemaType("homePage")
+        .title("Home Page")
+        .child(
+          S.editor()
+            .id("homePage")
+            .schemaType("homePage")
+            .documentId("homePage")
+        ),
+
+      S.divider(),
+
       S.documentTypeListItem("tower").title("Towers"),
       S.documentTypeListItem("article").title("Articles"),
 

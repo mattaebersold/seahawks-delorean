@@ -12,8 +12,10 @@
   --color-black: #010101;
   --color-red: #EA5C5C;
   --color-teal: #017A8F;
+  --color-bg: #f0f0f0;
+  --color-fg: #202020;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+  --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --max-width-narrow: 800px;
@@ -26,7 +28,7 @@
   --spacing-xl: 4rem;
   --spacing-2xl: 8rem;
   --spacing-3xl: 16rem;
-  --spacing-header: 50px;
+  --spacing-header: 72px;
   --spacing-gutter: 1rem;
 
   --radius-card: 24px;
@@ -34,12 +36,18 @@
 
 html,
 body {
-  @apply bg-black text-white;
+  @apply bg-bg text-fg min-h-screen overflow-auto;
 }
 
 
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
 h1, h2, h3, h4 {
-  font-family: "serif";
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
 }
 
 h1 {
@@ -98,4 +106,16 @@ select {
 
 label {
   @apply font-bold uppercase block;
+}
+
+/* Home page sections — offset scrollIntoView by fixed header height */
+#section-home,
+#section-about,
+#section-gallery,
+#section-book {
+  scroll-margin-top: var(--spacing-header);
+}
+
+div[data-ui="ToolScreen"] {
+  @apply h-screen overflow-auto;
 }

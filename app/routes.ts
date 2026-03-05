@@ -13,8 +13,9 @@ export default [
     ]),
     // Static routes (must come before :tower catch-all)
     route("styleguide", "./routes/styleguide.tsx"),
-    // Tower pages at root level - home page and /:slug
-    index("routes/towers/index.tsx"),
+    // Home page (dedicated home page with sections)
+    index("routes/home.tsx"),
+    // Tower pages at root level - /:slug (home tower kept for other pages)
     route(":tower", "./routes/towers/$tower.tsx"),
   ]),
   // From Studio layout, because of Visual Editing

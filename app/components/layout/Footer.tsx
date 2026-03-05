@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container mx-auto flex items-center justify-between p-4 lg:px-12">
         <span>© {new Date().getFullYear()}</span>
         
-        <div className="flex gap-3">
+        {/* <div className="flex gap-3">
           <a
             className="hover:text-cyan-600 dark:hover:text-cyan-200"
             href={STUDIO_BASEPATH}
@@ -20,7 +20,7 @@ export function Footer() {
           >
             Style Guide
           </a>
-        </div>
+        </div> */}
 
       </div>
     </footer>

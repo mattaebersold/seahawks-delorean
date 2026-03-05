@@ -1,5 +1,6 @@
 import * as blockSchemas from "./blocks";
 import { articleSchema } from "./articleSchema";
+import { homePageSchema } from "./homePageSchema";
 import { settingsSchema } from "./settingsSchema";
 import { towerSchema } from "./towerSchema";
 import { cardSchema } from "./objects/cardSchema";
@@ -12,6 +13,7 @@ export default [
   ...Object.values(blockSchemas),
   reusableBlockSchema,
   articleSchema,
+  homePageSchema,
   settingsSchema,
   towerSchema,
   cardSchema,

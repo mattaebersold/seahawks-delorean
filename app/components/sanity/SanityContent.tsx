@@ -32,7 +32,7 @@ export function SanityContent(props: ContentProps) {
   if (!value) return null;
 
   return (
-    <div className="prose font-serif dark:prose-invert lg:prose-2xl prose-a:text-cyan-600 dark:prose-a:text-cyan-200">
+    <div className="prose dark:prose-invert lg:prose-2xl prose-a:text-cyan-600 dark:prose-a:text-cyan-200">
       <PortableText value={value} components={components} />
     </div>
   );

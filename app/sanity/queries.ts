@@ -1,6 +1,6 @@
 import groq from "groq";
 
-export const SETTINGS_QUERY = groq`*[_id == "settings"][0]{ siteTitle, navLinks[]{ text, href } }`;
+export const SETTINGS_QUERY = groq`*[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, navLinks[]{ text, href } }`;
 
 export const ARTICLE_QUERY = groq`*[_type == "article" && slug.current == $article][0]{ title, content }`;
 
@@ -191,3 +191,41 @@ export const TOWER_QUERY = groq`*[_type == "tower" && slug.current == $tower][0]
 
 // Reusable blocks queries
 export const ALL_REUSABLE_BLOCKS_QUERY = groq`*[_type == "reusableBlock"]{ _id, title }`;
+
+// Home Page singleton query
+const _imageWithAsset = /* groq */ `{ asset->{ _id, url }, hotspot, crop }`;
+const _buttons = /* groq */ `buttons[]{ _key, text, href, variant }`;
+
+export const HOME_PAGE_QUERY = groq`*[_type == "homePage"][0]{
+  homeSection{
+    images[]{
+      _key,
+      image ${_imageWithAsset},
+      alt
+    },
+    title,
+    subtitle,
+    ${_buttons}
+  },
+  aboutSection{
+    image ${_imageWithAsset},
+    imageAlt,
+    title,
+    body,
+    ${_buttons}
+  },
+  gallerySection{
+    title,
+    images[]{
+      _key,
+      image ${_imageWithAsset},
+      alt
+    }
+  },
+  bookSection{
+    title,
+    body,
+    image ${_imageWithAsset},
+    imageAlt
+  }
+}`;
