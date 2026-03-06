@@ -11,53 +11,29 @@ interface HeaderProps {
   logoUrl?: string | null;
 }
 
+const HEADER_HEIGHT = 72; // matches --spacing-header
+
 function useActiveSection(): SectionKey | null {
   const [active, setActive] = useState<SectionKey | null>(null);
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    const entries = new Map<string, IntersectionObserverEntry>();
-
-    function pickActive() {
-      // Among all visible sections, pick the one highest in the viewport
-      let bestKey: SectionKey | null = null;
-      let bestTop = Infinity;
-
-      for (const [key, entry] of entries) {
-        if (entry.isIntersecting) {
-          const top = entry.boundingClientRect.top;
-          if (top < bestTop) {
-            bestTop = top;
-            bestKey = key as SectionKey;
-          }
+    function update() {
+      // Pick the last section whose top edge has crossed the header + 20% threshold
+      const threshold = HEADER_HEIGHT + window.innerHeight * 0.2;
+      let activeKey: SectionKey | null = null;
+      for (const { id } of NAV_SECTIONS) {
+        const el = document.getElementById(SECTION_IDS[id]);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= threshold) {
+          activeKey = id;
         }
       }
-      setActive(bestKey);
+      setActive(activeKey);
     }
 
-    NAV_SECTIONS.forEach(({ id }) => {
-      const el = document.getElementById(SECTION_IDS[id]);
-      if (!el) return;
-
-      const obs = new IntersectionObserver(
-        (obsEntries) => {
-          obsEntries.forEach((entry) => {
-            entries.set(id, entry);
-          });
-          pickActive();
-        },
-        {
-          // Section is "active" when it occupies the upper portion of the viewport
-          rootMargin: "-10% 0px -50% 0px",
-          threshold: 0,
-        }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-
-    return () => observers.forEach((o) => o.disconnect());
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
   }, []);
 
   return active;
@@ -70,14 +46,12 @@ export function Header({ title, logoUrl }: HeaderProps) {
   const isHomePage = location.pathname === "/";
   const activeSection = useActiveSection();
 
-  // Sync query param when active section changes (scroll-driven)
+  // Update hash as user scrolls (replaceState bypasses React Router so it won't re-trigger the scroll effect)
   useEffect(() => {
     if (!isHomePage || !activeSection) return;
-    const url = new URL(window.location.href);
-    const current = url.searchParams.get("section");
-    if (current !== activeSection) {
-      url.searchParams.set("section", activeSection);
-      window.history.replaceState({}, "", url.toString());
+    const hash = `#${activeSection}`;
+    if (window.location.hash !== hash) {
+      window.history.replaceState({}, "", hash);
     }
   }, [isHomePage, activeSection]);
 
@@ -89,12 +63,10 @@ export function Header({ title, logoUrl }: HeaderProps) {
         const el = document.getElementById(SECTION_IDS[id]);
         if (el) {
           el.scrollIntoView({ behavior: "smooth" });
-          const url = new URL(window.location.href);
-          url.searchParams.set("section", id);
-          window.history.pushState({}, "", url.toString());
+          window.history.pushState({}, "", `#${id}`);
         }
       } else {
-        navigate(`/?section=${id}`);
+        navigate(`/#${id}`);
       }
     },
     [isHomePage, navigate]
