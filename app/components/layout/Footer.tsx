@@ -1,27 +1,20 @@
-import { STUDIO_BASEPATH } from "~/sanity/constants";
+interface FooterProps {
+  email?: string | null;
+}
 
-export function Footer() {
+export function Footer({ email }: FooterProps) {
   return (
     <footer className="border-t border-gray-100 dark:border-gray-900">
       <div className="container mx-auto flex items-center justify-between p-4 lg:px-12">
         <span>© {new Date().getFullYear()}</span>
-        
-        {/* <div className="flex gap-3">
+        {email && (
           <a
-            className="hover:text-cyan-600 dark:hover:text-cyan-200"
-            href={STUDIO_BASEPATH}
+            href={`mailto:${email}`}
+            className="text-white/70 hover:text-white transition-colors"
           >
-            Admin
+            {email}
           </a>
-
-          <a
-            className="hover:text-cyan-600 dark:hover:text-cyan-200"
-            href="/styleguide"
-          >
-            Style Guide
-          </a>
-        </div> */}
-
+        )}
       </div>
     </footer>
   );

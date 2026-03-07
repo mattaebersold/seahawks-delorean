@@ -69,7 +69,7 @@ function WebsiteContent({ loaderData }: Route.ComponentProps) {
         <div className={location.pathname !== "/" ? "pt-header" : ""}>
           <Outlet />
         </div>
-        <Footer />
+        <Footer email={data?.email ?? null} />
       </div>
 
       {/* Add Sanity Studio preview mode stuff */}

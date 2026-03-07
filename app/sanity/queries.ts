@@ -1,6 +1,6 @@
 import groq from "groq";
 
-export const SETTINGS_QUERY = groq`*[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, navLinks[]{ text, href } }`;
+export const SETTINGS_QUERY = groq`*[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, email }`;
 
 export const ARTICLE_QUERY = groq`*[_type == "article" && slug.current == $article][0]{ title, content }`;
 
@@ -196,36 +196,44 @@ export const ALL_REUSABLE_BLOCKS_QUERY = groq`*[_type == "reusableBlock"]{ _id, 
 const _imageWithAsset = /* groq */ `{ asset->{ _id, url }, hotspot, crop }`;
 const _buttons = /* groq */ `buttons[]{ _key, text, href, variant }`;
 
-export const HOME_PAGE_QUERY = groq`*[_type == "homePage"][0]{
-  homeSection{
+export const HOME_PAGE_QUERY = groq`{
+  "homeSection": *[_type == "homeSection"][0]{
     images[]{
       _key,
       image ${_imageWithAsset},
-      alt
+      video{ asset->{ _id, url } }
     },
     title,
     subtitle,
     ${_buttons}
   },
-  aboutSection{
+  "aboutSection": *[_type == "aboutSection"][0]{
     image ${_imageWithAsset},
     imageAlt,
     title,
     body,
     ${_buttons}
   },
-  gallerySection{
+  "gallerySection": *[_type == "gallerySection"][0]{
     title,
+    description,
+    images[]{
+      _key,
+      image ${_imageWithAsset}
+    }
+  },
+  "historySection": *[_type == "historySection"][0]{
+    title,
+    description,
     images[]{
       _key,
       image ${_imageWithAsset},
       alt
     }
   },
-  bookSection{
+  "bookSection": *[_type == "bookSection"][0]{
     title,
     body,
-    image ${_imageWithAsset},
-    imageAlt
+    image ${_imageWithAsset}
   }
 }`;

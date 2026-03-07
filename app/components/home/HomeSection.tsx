@@ -31,7 +31,21 @@ export function HomeSection({ data }: Props) {
       {/* Background image marquee — all images stacked, cross-fade via opacity */}
       <div className="absolute inset-0">
         <AnimatePresence>
-          {currentImage?.image?.asset?.url ? (
+          {currentImage?.video?.asset?.url ? (
+            <motion.video
+              key={currentImage._key}
+              src={currentImage.video.asset.url}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+          ) : currentImage?.image?.asset?.url ? (
             <motion.img
               key={currentImage._key}
               src={sanityImageUrl(currentImage.image)
@@ -40,7 +54,7 @@ export function HomeSection({ data }: Props) {
                 .fit("crop")
                 .auto("format")
                 .url()}
-              alt={currentImage.alt ?? ""}
+              alt=""
               className="absolute inset-0 w-full h-full object-cover"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -50,7 +64,7 @@ export function HomeSection({ data }: Props) {
           ) : null}
         </AnimatePresence>
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/70" />
       </div>
 
       {/* Content */}

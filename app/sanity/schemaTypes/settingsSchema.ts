@@ -20,11 +20,10 @@ export const settingsSchema = defineType({
       type: "string",
     }),
     defineField({
-      name: "navLinks",
-      title: "Navigation Links",
-      description: "Links displayed in the site header",
-      type: "array",
-      of: [{ type: "navLink" }],
+      name: "email",
+      title: "Email",
+      description: "Global contact email displayed in the footer",
+      type: "string",
     }),
   ],
   preview: {

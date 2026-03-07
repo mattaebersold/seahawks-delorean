@@ -20,14 +20,13 @@ export interface SanityButton {
 
 export interface MarqueeImage {
   _key: string;
-  image: SanityImageWithAsset;
-  alt?: string;
+  image?: SanityImageWithAsset;
+  video?: { asset: { _id: string; url: string } };
 }
 
 export interface GalleryImage {
   _key: string;
   image: SanityImageWithAsset;
-  alt?: string;
 }
 
 export interface HomeSection {
@@ -47,20 +46,33 @@ export interface AboutSection {
 
 export interface GallerySection {
   title?: string;
+  description?: string;
   images?: GalleryImage[];
+}
+
+export interface HistoryImage {
+  _key: string;
+  image: SanityImageWithAsset;
+  alt?: string;
+}
+
+export interface HistorySection {
+  title?: string;
+  description?: string;
+  images?: HistoryImage[];
 }
 
 export interface BookSection {
   title?: string;
   body?: PortableTextBlock[];
   image?: SanityImageWithAsset;
-  imageAlt?: string;
 }
 
 export interface HomePage {
   homeSection?: HomeSection;
   aboutSection?: AboutSection;
   gallerySection?: GallerySection;
+  historySection?: HistorySection;
   bookSection?: BookSection;
 }
 
@@ -68,6 +80,7 @@ export const SECTION_IDS = {
   home: "section-home",
   about: "section-about",
   gallery: "section-gallery",
+  history: "section-history",
   book: "section-book",
 } as const;
 
@@ -77,5 +90,6 @@ export const NAV_SECTIONS: Array<{ id: SectionKey; label: string }> = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "gallery", label: "Gallery" },
+  { id: "history", label: "History" },
   { id: "book", label: "Book Appointment" },
 ];

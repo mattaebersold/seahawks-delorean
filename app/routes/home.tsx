@@ -8,6 +8,7 @@ import { HOME_PAGE_QUERY } from "~/sanity/queries";
 import { HomeSection } from "~/components/home/HomeSection";
 import { AboutSection } from "~/components/home/AboutSection";
 import { GallerySection } from "~/components/home/GallerySection";
+import { HistorySection } from "~/components/home/HistorySection";
 import { BookAppointmentSection } from "~/components/home/BookAppointmentSection";
 import { SECTION_IDS } from "~/types/homeTypes";
 import type { HomePage } from "~/types/homeTypes";
@@ -63,6 +64,7 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
       <HomeSection data={data?.homeSection} />
       <AboutSection data={data?.aboutSection} />
       <GallerySection data={data?.gallerySection} />
+      <HistorySection data={data?.historySection} />
       <BookAppointmentSection data={data?.bookSection} />
     </main>
   );

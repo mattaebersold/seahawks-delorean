@@ -160,11 +160,7 @@ export type Settings = {
     _type: "image";
   };
   siteTitle?: string;
-  navLinks?: Array<
-    {
-      _key: string;
-    } & NavLink
-  >;
+  email?: string;
 };
 
 export type SanityImageCrop = {
@@ -183,34 +179,49 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
-export type HomePage = {
+export type BookSection = {
   _id: string;
-  _type: "homePage";
+  _type: "bookSection";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  homeSection?: {
-    images?: Array<{
-      image?: {
-        asset?: SanityImageAssetReference;
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      };
-      alt?: string;
-      _type: "marqueeImage";
+  title?: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
       _key: string;
     }>;
-    title?: string;
-    subtitle?: string;
-    buttons?: Array<
-      {
-        _key: string;
-      } & PortableTextButton
-    >;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
   };
-  aboutSection?: {
+};
+
+export type HistorySection = {
+  _id: string;
+  _type: "historySection";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  images?: Array<{
     image?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -218,67 +229,21 @@ export type HomePage = {
       crop?: SanityImageCrop;
       _type: "image";
     };
-    imageAlt?: string;
-    title?: string;
-    body?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    buttons?: Array<
-      {
-        _key: string;
-      } & PortableTextButton
-    >;
-  };
-  gallerySection?: {
-    title?: string;
-    images?: Array<{
-      image?: {
-        asset?: SanityImageAssetReference;
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      };
-      alt?: string;
-      _type: "galleryImage";
-      _key: string;
-    }>;
-  };
-  bookSection?: {
-    title?: string;
-    body?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
+    alt?: string;
+    _type: "historyImage";
+    _key: string;
+  }>;
+};
+
+export type GallerySection = {
+  _id: string;
+  _type: "gallerySection";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  images?: Array<{
     image?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -286,8 +251,80 @@ export type HomePage = {
       crop?: SanityImageCrop;
       _type: "image";
     };
-    imageAlt?: string;
+    _type: "galleryImage";
+    _key: string;
+  }>;
+};
+
+export type AboutSection = {
+  _id: string;
+  _type: "aboutSection";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
   };
+  imageAlt?: string;
+  title?: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  buttons?: Array<
+    {
+      _key: string;
+    } & PortableTextButton
+  >;
+};
+
+export type HomeSection = {
+  _id: string;
+  _type: "homeSection";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  images?: Array<{
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    video?: {
+      asset?: SanityFileAssetReference;
+      media?: unknown;
+      _type: "file";
+    };
+    _type: "marqueeImage";
+    _key: string;
+  }>;
+  title?: string;
+  subtitle?: string;
+  buttons?: Array<
+    {
+      _key: string;
+    } & PortableTextButton
+  >;
 };
 
 export type Article = {
@@ -638,7 +675,11 @@ export type AllSanitySchemaTypes =
   | Settings
   | SanityImageCrop
   | SanityImageHotspot
-  | HomePage
+  | BookSection
+  | HistorySection
+  | GallerySection
+  | AboutSection
+  | HomeSection
   | Article
   | SpacerBlock
   | ReusableBlockReference
@@ -663,12 +704,12 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: app/sanity/queries.ts
 // Variable: SETTINGS_QUERY
-// Query: *[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, navLinks[]{ text, href } }
+// Query: *[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, email }
 export type SETTINGS_QUERY_RESULT =
   | {
       logo: null;
       siteTitle: null;
-      navLinks: null;
+      email: null;
     }
   | {
       logo: {
@@ -678,10 +719,7 @@ export type SETTINGS_QUERY_RESULT =
         } | null;
       } | null;
       siteTitle: string | null;
-      navLinks: Array<{
-        text: string | null;
-        href: string | null;
-      }> | null;
+      email: string | null;
     }
   | null;
 
@@ -1880,7 +1918,7 @@ export type ALL_REUSABLE_BLOCKS_QUERY_RESULT = Array<{
 
 // Source: app/sanity/queries.ts
 // Variable: HOME_PAGE_QUERY
-// Query: *[_type == "homePage"][0]{  homeSection{    images[]{      _key,      image { asset->{ _id, url }, hotspot, crop },      alt    },    title,    subtitle,    buttons[]{ _key, text, href, variant }  },  aboutSection{    image { asset->{ _id, url }, hotspot, crop },    imageAlt,    title,    body,    buttons[]{ _key, text, href, variant }  },  gallerySection{    title,    images[]{      _key,      image { asset->{ _id, url }, hotspot, crop },      alt    }  },  bookSection{    title,    body,    image { asset->{ _id, url }, hotspot, crop },    imageAlt  }}
+// Query: {  "homeSection": *[_type == "homeSection"][0]{    images[]{      _key,      image { asset->{ _id, url }, hotspot, crop },      video{ asset->{ _id, url } }    },    title,    subtitle,    buttons[]{ _key, text, href, variant }  },  "aboutSection": *[_type == "aboutSection"][0]{    image { asset->{ _id, url }, hotspot, crop },    imageAlt,    title,    body,    buttons[]{ _key, text, href, variant }  },  "gallerySection": *[_type == "gallerySection"][0]{    title,    description,    images[]{      _key,      image { asset->{ _id, url }, hotspot, crop }    }  },  "historySection": *[_type == "historySection"][0]{    title,    description,    images[]{      _key,      image { asset->{ _id, url }, hotspot, crop },      alt    }  },  "bookSection": *[_type == "bookSection"][0]{    title,    body,    image { asset->{ _id, url }, hotspot, crop }  }}
 export type HOME_PAGE_QUERY_RESULT = {
   homeSection: {
     images: Array<{
@@ -1893,7 +1931,12 @@ export type HOME_PAGE_QUERY_RESULT = {
         hotspot: SanityImageHotspot | null;
         crop: SanityImageCrop | null;
       } | null;
-      alt: string | null;
+      video: {
+        asset: {
+          _id: string;
+          url: string | null;
+        } | null;
+      } | null;
     }> | null;
     title: string | null;
     subtitle: string | null;
@@ -1942,6 +1985,22 @@ export type HOME_PAGE_QUERY_RESULT = {
   } | null;
   gallerySection: {
     title: string | null;
+    description: string | null;
+    images: Array<{
+      _key: string;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+        } | null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+      } | null;
+    }> | null;
+  } | null;
+  historySection: {
+    title: string | null;
+    description: string | null;
     images: Array<{
       _key: string;
       image: {
@@ -1983,19 +2042,18 @@ export type HOME_PAGE_QUERY_RESULT = {
       hotspot: SanityImageHotspot | null;
       crop: SanityImageCrop | null;
     } | null;
-    imageAlt: string | null;
   } | null;
-} | null;
+};
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, navLinks[]{ text, href } }': SETTINGS_QUERY_RESULT;
+    '*[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, email }': SETTINGS_QUERY_RESULT;
     '*[_type == "article" && slug.current == $article][0]{ title, content }': ARTICLE_QUERY_RESULT;
     '*[_type == "tower" && slug.current == "/"][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  blocks[]{\n    \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Spacer block fields\n  size,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  },\n  // Reusable block reference - dereference and fetch nested blocks\n  reusableBlock->{\n    _id,\n    _type,\n    title,\n    blocks[]{\n      \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  // Stacked carousel / Full card block fields\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Topics grid block fields\n  topics[]->{\n    _id,\n    title,\n    slug,\n    description,\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    }\n  },\n  // Spacer block fields\n  size,\n  // Essentials articles block fields\n  categorySlug,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  }\n\n    }\n  }\n\n  }\n}': HOME_TOWER_QUERY_RESULT;
     '*[_type == "tower" && slug.current == $tower][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  blocks[]{\n    \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Spacer block fields\n  size,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  },\n  // Reusable block reference - dereference and fetch nested blocks\n  reusableBlock->{\n    _id,\n    _type,\n    title,\n    blocks[]{\n      \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  // Stacked carousel / Full card block fields\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Topics grid block fields\n  topics[]->{\n    _id,\n    title,\n    slug,\n    description,\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    }\n  },\n  // Spacer block fields\n  size,\n  // Essentials articles block fields\n  categorySlug,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  }\n\n    }\n  }\n\n  }\n}': TOWER_QUERY_RESULT;
     '*[_type == "reusableBlock"]{ _id, title }': ALL_REUSABLE_BLOCKS_QUERY_RESULT;
-    '*[_type == "homePage"][0]{\n  homeSection{\n    images[]{\n      _key,\n      image { asset->{ _id, url }, hotspot, crop },\n      alt\n    },\n    title,\n    subtitle,\n    buttons[]{ _key, text, href, variant }\n  },\n  aboutSection{\n    image { asset->{ _id, url }, hotspot, crop },\n    imageAlt,\n    title,\n    body,\n    buttons[]{ _key, text, href, variant }\n  },\n  gallerySection{\n    title,\n    images[]{\n      _key,\n      image { asset->{ _id, url }, hotspot, crop },\n      alt\n    }\n  },\n  bookSection{\n    title,\n    body,\n    image { asset->{ _id, url }, hotspot, crop },\n    imageAlt\n  }\n}': HOME_PAGE_QUERY_RESULT;
+    '{\n  "homeSection": *[_type == "homeSection"][0]{\n    images[]{\n      _key,\n      image { asset->{ _id, url }, hotspot, crop },\n      video{ asset->{ _id, url } }\n    },\n    title,\n    subtitle,\n    buttons[]{ _key, text, href, variant }\n  },\n  "aboutSection": *[_type == "aboutSection"][0]{\n    image { asset->{ _id, url }, hotspot, crop },\n    imageAlt,\n    title,\n    body,\n    buttons[]{ _key, text, href, variant }\n  },\n  "gallerySection": *[_type == "gallerySection"][0]{\n    title,\n    description,\n    images[]{\n      _key,\n      image { asset->{ _id, url }, hotspot, crop }\n    }\n  },\n  "historySection": *[_type == "historySection"][0]{\n    title,\n    description,\n    images[]{\n      _key,\n      image { asset->{ _id, url }, hotspot, crop },\n      alt\n    }\n  },\n  "bookSection": *[_type == "bookSection"][0]{\n    title,\n    body,\n    image { asset->{ _id, url }, hotspot, crop }\n  }\n}': HOME_PAGE_QUERY_RESULT;
   }
 }

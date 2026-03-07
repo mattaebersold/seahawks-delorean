@@ -3,45 +3,37 @@ import type {
   StructureResolver,
 } from "sanity/structure";
 
+function singletonItem(
+  S: Parameters<StructureResolver>[0],
+  schemaType: string,
+  title: string
+) {
+  return S.listItem()
+    .id(schemaType)
+    .schemaType(schemaType)
+    .title(title)
+    .child(
+      S.editor()
+        .id(schemaType)
+        .schemaType(schemaType)
+        .documentId(schemaType)
+    );
+}
+
 export const structure: StructureResolver = (S) =>
   S.list()
     .id("root")
     .title("Content")
     .items([
-      // Home Page singleton — direct editor
-      S.listItem()
-        .id("homePage")
-        .schemaType("homePage")
-        .title("Home Page")
-        .child(
-          S.editor()
-            .id("homePage")
-            .schemaType("homePage")
-            .documentId("homePage")
-        ),
-
-      S.divider(),
-
-      S.documentTypeListItem("tower").title("Towers"),
-      S.documentTypeListItem("article").title("Articles"),
-
-      S.divider(),
-
-      // Reusable Blocks
-      S.documentTypeListItem("reusableBlock").title("Reusable Blocks"),
+      singletonItem(S, "homeSection", "Hero"),
+      singletonItem(S, "aboutSection", "About"),
+      singletonItem(S, "gallerySection", "Gallery"),
+      singletonItem(S, "historySection", "History"),
+      singletonItem(S, "bookSection", "Book Appointment"),
 
       // Settings
       S.divider(),
-      S.listItem()
-        .id("settings")
-        .schemaType("settings")
-        .title("Settings")
-        .child(
-          S.editor()
-            .id("settings")
-            .schemaType("settings")
-            .documentId("settings")
-        ),
+      singletonItem(S, "settings", "Settings"),
     ]);
 
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (

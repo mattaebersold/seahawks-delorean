@@ -49,7 +49,7 @@ export function BookAppointmentSection({ data }: Props) {
               <div className="mt-lg overflow-hidden rounded-card">
                 <img
                   src={sanityImageUrl(data.image).width(800).fit("max").auto("format").url()}
-                  alt={data.imageAlt ?? ""}
+                  alt=""
                   className="w-full object-cover"
                 />
               </div>

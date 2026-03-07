@@ -1,6 +1,10 @@
 import * as blockSchemas from "./blocks";
 import { articleSchema } from "./articleSchema";
-import { homePageSchema } from "./homePageSchema";
+import { homeSectionSchema } from "./homeSectionSchema";
+import { aboutSectionSchema } from "./aboutSectionSchema";
+import { gallerySectionSchema } from "./gallerySectionSchema";
+import { historySectionSchema } from "./historySectionSchema";
+import { bookSectionSchema } from "./bookSectionSchema";
 import { settingsSchema } from "./settingsSchema";
 import { towerSchema } from "./towerSchema";
 import { cardSchema } from "./objects/cardSchema";
@@ -13,7 +17,11 @@ export default [
   ...Object.values(blockSchemas),
   reusableBlockSchema,
   articleSchema,
-  homePageSchema,
+  homeSectionSchema,
+  aboutSectionSchema,
+  gallerySectionSchema,
+  historySectionSchema,
+  bookSectionSchema,
   settingsSchema,
   towerSchema,
   cardSchema,
