@@ -22,11 +22,12 @@ export function BookAppointmentSection({ data }: Props) {
     setError(false);
     try {
       const formData = new FormData(e.currentTarget);
-      await fetch("/", {
+      const res = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),
       });
+      if (!res.ok) throw new Error("Non-OK response");
       setSubmitted(true);
     } catch {
       setError(true);
@@ -155,7 +156,7 @@ export function BookAppointmentSection({ data }: Props) {
 
                 <div className="mt-sm">
                   <Button type="submit" disabled={loading}>
-                    {loading ? "Sending…" : "Book Appointment"}
+                    {loading ? "Sending…" : "Submit"}
                   </Button>
                 </div>
               </form>

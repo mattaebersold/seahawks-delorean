@@ -1,6 +1,6 @@
 import groq from "groq";
 
-export const SETTINGS_QUERY = groq`*[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, email }`;
+export const SETTINGS_QUERY = groq`*[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, email, facebookUrl }`;
 
 export const ARTICLE_QUERY = groq`*[_type == "article" && slug.current == $article][0]{ title, content }`;
 

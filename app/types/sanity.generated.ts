@@ -704,12 +704,13 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: app/sanity/queries.ts
 // Variable: SETTINGS_QUERY
-// Query: *[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, email }
+// Query: *[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, email, facebookUrl }
 export type SETTINGS_QUERY_RESULT =
   | {
       logo: null;
       siteTitle: null;
       email: null;
+      facebookUrl: null;
     }
   | {
       logo: {
@@ -720,6 +721,7 @@ export type SETTINGS_QUERY_RESULT =
       } | null;
       siteTitle: string | null;
       email: string | null;
+      facebookUrl: string | null;
     }
   | null;
 
@@ -2049,7 +2051,7 @@ export type HOME_PAGE_QUERY_RESULT = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, email }': SETTINGS_QUERY_RESULT;
+    '*[_id == "settings"][0]{ logo{ asset->{ _id, url } }, siteTitle, email, facebookUrl }': SETTINGS_QUERY_RESULT;
     '*[_type == "article" && slug.current == $article][0]{ title, content }': ARTICLE_QUERY_RESULT;
     '*[_type == "tower" && slug.current == "/"][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  blocks[]{\n    \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Spacer block fields\n  size,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  },\n  // Reusable block reference - dereference and fetch nested blocks\n  reusableBlock->{\n    _id,\n    _type,\n    title,\n    blocks[]{\n      \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  // Stacked carousel / Full card block fields\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Topics grid block fields\n  topics[]->{\n    _id,\n    title,\n    slug,\n    description,\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    }\n  },\n  // Spacer block fields\n  size,\n  // Essentials articles block fields\n  categorySlug,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  }\n\n    }\n  }\n\n  }\n}': HOME_TOWER_QUERY_RESULT;
     '*[_type == "tower" && slug.current == $tower][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  blocks[]{\n    \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Spacer block fields\n  size,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  },\n  // Reusable block reference - dereference and fetch nested blocks\n  reusableBlock->{\n    _id,\n    _type,\n    title,\n    blocks[]{\n      \n  _key,\n  _type,\n  internalTitle,\n  blockSpacing,\n  disabled,\n  hideWhen,\n  backgroundColor,\n  paddingTop,\n  paddingBottom,\n  // Copy block fields\n  body,\n  // Media block fields\n  media{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  caption,\n  aspectRatio,\n  // Stacked carousel / Full card block fields\n  eyebrow,\n  heading,\n  cards[]{\n    \n  _key,\n  image{\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    },\n    video{\n      asset->{\n        _id,\n        url\n      }\n    },\n    alt\n  },\n  eyebrow,\n  title,\n  subtitle,\n  buttonText,\n  buttonHref\n\n  },\n  // Topics grid block fields\n  topics[]->{\n    _id,\n    title,\n    slug,\n    description,\n    image{\n      asset->{\n        _id,\n        url\n      },\n      hotspot,\n      crop\n    }\n  },\n  // Spacer block fields\n  size,\n  // Essentials articles block fields\n  categorySlug,\n  // Form block fields\n  formName,\n  submitText,\n  successMessage,\n  fields[]{\n    _key,\n    label,\n    name,\n    type,\n    placeholder,\n    required,\n    options\n  }\n\n    }\n  }\n\n  }\n}': TOWER_QUERY_RESULT;

@@ -64,7 +64,7 @@ function WebsiteContent({ loaderData }: Route.ComponentProps) {
     <>
 
       <div>
-        <Header title={data?.siteTitle} logoUrl={data?.logo?.asset?.url ?? null} />
+        <Header title={data?.siteTitle} logoUrl={data?.logo?.asset?.url ?? null} facebookUrl={data?.facebookUrl ?? null} />
         {/* Non-home pages need top padding to clear the fixed header */}
         <div className={location.pathname !== "/" ? "pt-header" : ""}>
           <Outlet />

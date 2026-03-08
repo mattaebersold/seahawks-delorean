@@ -22,11 +22,12 @@ export default function FormBlock({
 
     try {
       const data = new FormData(e.currentTarget);
-      await fetch("/", {
+      const res = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(data as any).toString(),
       });
+      if (!res.ok) throw new Error("Non-OK response");
       setSubmitted(true);
     } catch {
       setError(true);

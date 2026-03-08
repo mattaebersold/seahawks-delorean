@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Netlify form registration</title></head>
+  <body>
+    <!--
+      This file is never shown to users. It exists so Netlify's build crawler
+      can discover and register the forms used in the React app, which are
+      otherwise invisible to Netlify because they're server-rendered.
+    -->
+
+    <!-- Book Appointment form (BookAppointmentSection.tsx) -->
+    <form name="book-appointment" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="book-appointment" />
+      <input name="name" type="text" />
+      <input name="email" type="email" />
+      <input name="phone" type="tel" />
+      <textarea name="description"></textarea>
+      <input name="date" type="date" />
+      <input name="time" type="time" />
+    </form>
+  </body>
+</html>

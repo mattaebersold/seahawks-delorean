@@ -97,7 +97,7 @@ export function HistorySection({ data }: Props) {
         )}
 
         {images.length > 0 ? (
-          <div className="columns-2 md:columns-3 gap-3">
+          <div className="columns-1 md:columns-2 gap-3">
             {images.map((img, i) => (
               <button
                 key={img._key}

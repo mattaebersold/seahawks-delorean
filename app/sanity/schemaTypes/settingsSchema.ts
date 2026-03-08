@@ -25,6 +25,12 @@ export const settingsSchema = defineType({
       description: "Global contact email displayed in the footer",
       type: "string",
     }),
+    defineField({
+      name: "facebookUrl",
+      title: "Facebook URL",
+      description: "Link to your Facebook page, displayed in the header",
+      type: "url",
+    }),
   ],
   preview: {
     select: {},
