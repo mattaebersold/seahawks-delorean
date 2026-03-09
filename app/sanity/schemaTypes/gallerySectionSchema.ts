@@ -19,11 +19,12 @@ export const gallerySectionSchema = defineType({
           name: "galleryImage",
           fields: [
             defineField({ name: "image", type: "image", options: { hotspot: true } }),
+            defineField({ name: "caption", title: "Caption", type: "string" }),
           ],
           preview: {
-            select: { media: "image" },
-            prepare({ media }) {
-              return { media, title: "Image" };
+            select: { media: "image", title: "caption" },
+            prepare({ media, title }) {
+              return { media, title: title ?? "Image" };
             },
           },
         },

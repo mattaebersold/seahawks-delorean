@@ -27,6 +27,7 @@ export interface MarqueeImage {
 export interface GalleryImage {
   _key: string;
   image: SanityImageWithAsset;
+  caption?: string;
 }
 
 export interface HomeSection {

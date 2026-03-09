@@ -219,7 +219,8 @@ export const HOME_PAGE_QUERY = groq`{
     description,
     images[]{
       _key,
-      image ${_imageWithAsset}
+      image ${_imageWithAsset},
+      caption
     }
   },
   "historySection": *[_type == "historySection"][0]{
