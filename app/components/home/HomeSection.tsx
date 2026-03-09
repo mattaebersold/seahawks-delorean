@@ -81,7 +81,7 @@ export function HomeSection({ data }: Props) {
           <img
             src={sanityImageUrl(data.foregroundImage).width(800).fit("max").auto("format").url()}
             alt=""
-            className="my-lg max-w-sm w-full"
+            className="my-md w-11/12 h-auto max-w-[500px]"
           />
         )}
         {data?.bottomText && (
