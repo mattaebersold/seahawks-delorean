@@ -205,6 +205,8 @@ export const HOME_PAGE_QUERY = groq`{
     },
     title,
     subtitle,
+    foregroundImage ${_imageWithAsset},
+    bottomText,
     ${_buttons}
   },
   "aboutSection": *[_type == "aboutSection"][0]{

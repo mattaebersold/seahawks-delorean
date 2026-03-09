@@ -68,14 +68,24 @@ export function HomeSection({ data }: Props) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-gutter max-w-wide mx-auto">
+      <div className="relative z-10 text-center px-gutter max-w-wide mx-auto flex flex-col items-center">
         {data?.title && (
-          <h1 className="text-5xl md:text-7xl mb-md tracking-wider">
+          <h1 className="text-6xl md:text-7xl mb-md tracking-wider">
             {data.title}
           </h1>
         )}
         {data?.subtitle && (
-          <p className="my-xl text-white">{data.subtitle}</p>
+          <p className="text-white text-lg">{data.subtitle}</p>
+        )}
+        {data?.foregroundImage?.asset?.url && (
+          <img
+            src={sanityImageUrl(data.foregroundImage).width(800).fit("max").auto("format").url()}
+            alt=""
+            className="my-lg max-w-sm w-full"
+          />
+        )}
+        {data?.bottomText && (
+          <p className="text-white text-lg">{data.bottomText}</p>
         )}
         {data?.buttons && data.buttons.length > 0 && (
           <div className="flex flex-wrap gap-md justify-center mt-lg">

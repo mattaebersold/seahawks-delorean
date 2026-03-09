@@ -38,6 +38,14 @@ export const homeSectionSchema = defineType({
     defineField({ name: "title", title: "Title", type: "string" }),
     defineField({ name: "subtitle", title: "Subtitle", type: "string" }),
     defineField({
+      name: "foregroundImage",
+      title: "Foreground Image",
+      description: "Displayed in the center of the hero, between the title and bottom text.",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({ name: "bottomText", title: "Bottom Text", type: "string" }),
+    defineField({
       name: "buttons",
       title: "Buttons",
       type: "array",

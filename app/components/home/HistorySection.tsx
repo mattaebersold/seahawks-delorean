@@ -99,21 +99,27 @@ export function HistorySection({ data }: Props) {
         {images.length > 0 ? (
           <div className="columns-1 md:columns-2 gap-3">
             {images.map((img, i) => (
-              <button
-                key={img._key}
-                className="block w-full break-inside-avoid cursor-pointer group relative overflow-hidden rounded-card mb-3"
-                onClick={() => setModalIndex(i)}
-                aria-label={img.alt ?? `History image ${i + 1}`}
-              >
-                {img.image?.asset?.url && (
-                  <img
-                    src={sanityImageUrl(img.image).width(800).fit("max").auto("format").url()}
-                    alt={img.alt ?? ""}
-                    className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
-                  />
+              <div key={img._key} className="break-inside-avoid mb-3">
+                <button
+                  key={img._key}
+                  className="block w-full break-inside-avoid cursor-pointer group relative overflow-hidden rounded-card mb-3"
+                  onClick={() => setModalIndex(i)}
+                  aria-label={img.alt ?? `History image ${i + 1}`}
+                >
+                  {img.image?.asset?.url && (
+                    <img
+                      src={sanityImageUrl(img.image).width(800).fit("max").auto("format").url()}
+                      alt={img.alt ?? ""}
+                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+                </button>
+                {img.alt && (
+                  <p className="mt-1.5 text-xs text-black text-left px-1">{img.alt}</p>
                 )}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
-              </button>
+              </div>
+              
             ))}
           </div>
         ) : (

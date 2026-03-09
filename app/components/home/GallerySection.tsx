@@ -130,7 +130,7 @@ export function GallerySection({ data }: Props) {
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
                 </button>
                 {img.caption && (
-                  <p className="mt-1.5 text-xs text-white/50 text-center px-1">{img.caption}</p>
+                  <p className="mt-1.5 text-xs text-black text-left px-1">{img.caption}</p>
                 )}
               </div>
             ))}

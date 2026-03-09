@@ -34,6 +34,8 @@ export interface HomeSection {
   images?: MarqueeImage[];
   title?: string;
   subtitle?: string;
+  foregroundImage?: SanityImageWithAsset;
+  bottomText?: string;
   buttons?: SanityButton[];
 }
 
