@@ -1,5 +1,6 @@
 import ballad from "~/assets/ballad.jpg";
 import mobile from "~/assets/mobile.jpg";
+import long from "~/assets/long.jpg";
 
 interface FooterProps {
   email?: string | null;
@@ -14,6 +15,10 @@ export function Footer({ email }: FooterProps) {
         <img src={ballad} className="block w-full md:w-1/2" />
         <img src={mobile} className="block w-full md:w-1/2" />
 
+      </div>
+
+      <div className="">
+        <img src={long} className="block w-full h-auto" />
       </div>
 
       <div className="container mx-auto flex items-center justify-between p-4 lg:px-12">

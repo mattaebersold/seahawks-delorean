@@ -58,8 +58,8 @@ function HistoryModal({ images, startIndex, onClose }: ModalProps) {
           />
         )}
 
-        {image?.alt && (
-          <p className="text-white/60 text-sm mt-md">{image.alt}</p>
+        {image?.caption && (
+          <p className="text-white/60 text-sm mt-md">{image.caption}</p>
         )}
 
         {images.length > 1 && (
@@ -104,7 +104,7 @@ export function HistorySection({ data }: Props) {
                   key={img._key}
                   className="block w-full break-inside-avoid cursor-pointer group relative overflow-hidden rounded-card mb-3"
                   onClick={() => setModalIndex(i)}
-                  aria-label={img.alt ?? `History image ${i + 1}`}
+                  aria-label={img.caption ?? img.alt ?? `History image ${i + 1}`}
                 >
                   {img.image?.asset?.url && (
                     <img
@@ -115,8 +115,8 @@ export function HistorySection({ data }: Props) {
                   )}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
                 </button>
-                {img.alt && (
-                  <p className="mt-1.5 text-xs text-black text-left px-1">{img.alt}</p>
+                {img.caption && (
+                  <p className="mt-1.5 text-md text-black text-left px-1">{img.caption}</p>
                 )}
               </div>
               

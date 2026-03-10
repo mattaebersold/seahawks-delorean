@@ -20,9 +20,10 @@ export const historySectionSchema = defineType({
           fields: [
             defineField({ name: "image", type: "image", options: { hotspot: true } }),
             defineField({ name: "alt", title: "Alt Text", type: "string" }),
+            defineField({ name: "caption", title: "Caption", type: "string" }),
           ],
           preview: {
-            select: { media: "image", title: "alt" },
+            select: { media: "image", title: "caption" },
             prepare({ media, title }) {
               return { media, title: title || "Image" };
             },

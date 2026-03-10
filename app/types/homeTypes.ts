@@ -36,6 +36,9 @@ export interface HomeSection {
   subtitle?: string;
   foregroundImage?: SanityImageWithAsset;
   bottomText?: string;
+  leftColumnText?: string;
+  centerColumnImage?: SanityImageWithAsset;
+  rightColumnText?: string;
   buttons?: SanityButton[];
 }
 
@@ -57,6 +60,7 @@ export interface HistoryImage {
   _key: string;
   image: SanityImageWithAsset;
   alt?: string;
+  caption?: string;
 }
 
 export interface HistorySection {

@@ -87,7 +87,7 @@ export function Header({ title, logoUrl, facebookUrl }: HeaderProps) {
             className="flex items-center"
           >
             {logoUrl ? (
-              <img src={logoUrl} alt={title ?? "Logo"} className="h-8 w-auto" />
+              <img src={logoUrl} alt={title ?? "Logo"} className="h-12 w-auto" />
             ) : (
               <span className="text-white font-bold text-lg tracking-wide">{title ?? "Home"}</span>
             )}
@@ -157,7 +157,7 @@ export function Header({ title, logoUrl, facebookUrl }: HeaderProps) {
           {/* Drawer header */}
           <div className="flex items-center justify-between p-4 border-b border-white/10">
             {logoUrl ? (
-              <img src={logoUrl} alt={title ?? "Logo"} className="h-8 w-auto" />
+              <img src={logoUrl} alt={title ?? "Logo"} className="h-12 w-auto" />
             ) : (
               <span>{title}</span>
             )}
