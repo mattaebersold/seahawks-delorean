@@ -5,6 +5,7 @@ import { aboutSectionSchema } from "./aboutSectionSchema";
 import { gallerySectionSchema } from "./gallerySectionSchema";
 import { historySectionSchema } from "./historySectionSchema";
 import { bookSectionSchema } from "./bookSectionSchema";
+import { faqSectionSchema } from "./faqSectionSchema";
 import { settingsSchema } from "./settingsSchema";
 import { towerSchema } from "./towerSchema";
 import { cardSchema } from "./objects/cardSchema";
@@ -22,6 +23,7 @@ export default [
   gallerySectionSchema,
   historySectionSchema,
   bookSectionSchema,
+  faqSectionSchema,
   settingsSchema,
   towerSchema,
   cardSchema,

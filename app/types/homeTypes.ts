@@ -46,6 +46,7 @@ export interface AboutSection {
   image?: SanityImageWithAsset;
   imageAlt?: string;
   title?: string;
+  subtitle?: string;
   body?: PortableTextBlock[];
   buttons?: SanityButton[];
 }
@@ -75,11 +76,24 @@ export interface BookSection {
   image?: SanityImageWithAsset;
 }
 
+export interface FaqItem {
+  _key: string;
+  question?: string;
+  answer?: string;
+}
+
+export interface FaqSection {
+  title?: string;
+  subtitle?: string;
+  items?: FaqItem[];
+}
+
 export interface HomePage {
   homeSection?: HomeSection;
   aboutSection?: AboutSection;
   gallerySection?: GallerySection;
   historySection?: HistorySection;
+  faqSection?: FaqSection;
   bookSection?: BookSection;
 }
 
@@ -88,6 +102,7 @@ export const SECTION_IDS = {
   about: "section-about",
   gallery: "section-gallery",
   history: "section-history",
+  faq: "section-faq",
   book: "section-book",
 } as const;
 
@@ -97,6 +112,7 @@ export const NAV_SECTIONS: Array<{ id: SectionKey; label: string }> = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "gallery", label: "Gallery" },
-  { id: "history", label: "History" },
-  { id: "book", label: "Book Appointment" },
+  { id: "history", label: "IN2TIME" },
+  { id: "book", label: "Contact/Reserve" },
+  { id: "faq", label: "FAQ" },
 ];

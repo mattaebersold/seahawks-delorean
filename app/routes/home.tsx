@@ -10,6 +10,7 @@ import { AboutSection } from "~/components/home/AboutSection";
 import { GallerySection } from "~/components/home/GallerySection";
 import { HistorySection } from "~/components/home/HistorySection";
 import { BookAppointmentSection } from "~/components/home/BookAppointmentSection";
+import { FaqSection } from "~/components/home/FaqSection";
 import { SECTION_IDS } from "~/types/homeTypes";
 import type { HomePage } from "~/types/homeTypes";
 import type { Route } from "./+types/home";
@@ -66,6 +67,7 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
       <GallerySection data={data?.gallerySection} />
       <HistorySection data={data?.historySection} />
       <BookAppointmentSection data={data?.bookSection} />
+      <FaqSection data={data?.faqSection} />
     </main>
   );
 }

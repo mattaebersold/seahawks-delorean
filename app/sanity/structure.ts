@@ -30,6 +30,7 @@ export const structure: StructureResolver = (S) =>
       singletonItem(S, "gallerySection", "Gallery"),
       singletonItem(S, "historySection", "History"),
       singletonItem(S, "bookSection", "Book Appointment"),
+      singletonItem(S, "faqSection", "FAQ"),
 
       // Settings
       S.divider(),

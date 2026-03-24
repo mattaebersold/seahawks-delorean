@@ -39,15 +39,25 @@ export function BookAppointmentSection({ data }: Props) {
   return (
     <section id={SECTION_IDS.book} className="py-2xl">
       <div className="max-w-wide mx-auto px-gutter">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-xl items-start">
+
+        <div className="text-center mb-lg">
+          {data?.title && (
+            <h2 className="text-4xl mb-lg">{data.title}</h2>
+          )}
+          <div className="wys text-xl">
+            {data?.body && <SanityContent value={data.body} />}
+          </div>
+
+          
+        </div>
+
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-md items-start">
           {/* Left: text + image */}
           <div>
-            {data?.title && (
-              <h2 className="text-4xl mb-lg">{data.title}</h2>
-            )}
-            {data?.body && <SanityContent value={data.body} />}
+            
             {data?.image?.asset?.url && (
-              <div className="mt-lg overflow-hidden rounded-card">
+              <div className="mt-lg overflow-hidden">
                 <img
                   src={sanityImageUrl(data.image).width(800).fit("max").auto("format").url()}
                   alt=""
@@ -58,7 +68,7 @@ export function BookAppointmentSection({ data }: Props) {
           </div>
 
           {/* Right: form */}
-          <div className="mt-lg">
+          <div>
             {submitted ? (
               <div className="bg-white/5 rounded-card p-lg text-center">
                 <p className="text-lg">Thank you! We'll be in touch to confirm your appointment.</p>

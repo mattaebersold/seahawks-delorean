@@ -10,6 +10,7 @@ export const aboutSectionSchema = defineType({
     defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
     defineField({ name: "imageAlt", title: "Image Alt Text", type: "string" }),
     defineField({ name: "title", title: "Title", type: "string" }),
+    defineField({ name: "subtitle", title: "Subtitle", type: "string" }),
     defineField({
       name: "body",
       title: "Body",

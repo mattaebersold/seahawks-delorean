@@ -107,7 +107,7 @@ export function GallerySection({ data }: Props) {
         {(data?.title || data?.description) && (
           <div className="mb-xl text-center max-w-[700px] mx-auto">
             {data.title && <h2 className="text-4xl mb-md">{data.title}</h2>}
-            {data.description && <p className="text-black leading-relaxed">{data.description}</p>}
+            {data.description && <p className="text-2xl text-black leading-relaxed">{data.description}</p>}
           </div>
         )}
 

@@ -71,12 +71,12 @@ export function HomeSection({ data }: Props) {
         {/* Content */}
         <div className="relative z-10 text-center px-gutter max-w-wide mx-auto flex flex-col items-center">
           {data?.title && (
-            <h1 className="!text-3xl mb-md tracking-wider">
+            <h1 className="!text-xl mb-md tracking-wider">
               {data.title}
             </h1>
           )}
           {data?.subtitle && (
-            <p className="text-white text-lg">{data.subtitle}</p>
+            <p className="text-white text-3xl">{data.subtitle}</p>
           )}
           {data?.foregroundImage?.asset?.url && (
             <img
@@ -86,7 +86,7 @@ export function HomeSection({ data }: Props) {
             />
           )}
           {data?.bottomText && (
-            <p className="text-white text-lg">{data.bottomText}</p>
+            <p className="text-white text-3xl">{data.bottomText}</p>
           )}
           {data?.buttons && data.buttons.length > 0 && (
             <div className="flex flex-wrap gap-md justify-center mt-lg">

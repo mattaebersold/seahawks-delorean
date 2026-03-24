@@ -216,6 +216,7 @@ export const HOME_PAGE_QUERY = groq`{
     image ${_imageWithAsset},
     imageAlt,
     title,
+    subtitle,
     body,
     ${_buttons}
   },
@@ -237,6 +238,11 @@ export const HOME_PAGE_QUERY = groq`{
       alt,
       caption
     }
+  },
+  "faqSection": *[_type == "faqSection"][0]{
+    title,
+    subtitle,
+    items[]{ _key, question, answer }
   },
   "bookSection": *[_type == "bookSection"][0]{
     title,
