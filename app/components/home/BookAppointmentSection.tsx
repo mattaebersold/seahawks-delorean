@@ -42,9 +42,9 @@ export function BookAppointmentSection({ data }: Props) {
 
         <div className="text-center mb-lg">
           {data?.title && (
-            <h2 className="text-4xl mb-lg">{data.title}</h2>
+            <h3>{data.title}</h3>
           )}
-          <div className="wys text-xl">
+          <div>
             {data?.body && <SanityContent value={data.body} />}
           </div>
 
@@ -172,7 +172,13 @@ export function BookAppointmentSection({ data }: Props) {
               </form>
             )}
           </div>
+
+
         </div>
+          <div className="w-3/4 max-w-[550px] text-center mx-auto">
+            <p className="text-xl pt-lg">The Seahawks Delorean Car and Trailer are Available for Hire - for appearances in greater King County, Washington area.</p>
+            <p className="text-sm italic text-black/50 max-w-[400px] mx-auto ">*This is for an appearance or possible a ride-along as in a parade - Not to drive the car. The Trailer cannot be used for riding in.</p>
+          </div>
       </div>
     </section>
   );

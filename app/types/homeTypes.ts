@@ -36,9 +36,6 @@ export interface HomeSection {
   subtitle?: string;
   foregroundImage?: SanityImageWithAsset;
   bottomText?: string;
-  leftColumnText?: string;
-  centerColumnImage?: SanityImageWithAsset;
-  rightColumnText?: string;
   buttons?: SanityButton[];
 }
 
@@ -49,6 +46,9 @@ export interface AboutSection {
   subtitle?: string;
   body?: PortableTextBlock[];
   buttons?: SanityButton[];
+  leftColumnText?: string;
+  centerColumnImage?: SanityImageWithAsset;
+  rightColumnText?: string;
 }
 
 export interface GallerySection {
@@ -67,6 +67,7 @@ export interface HistoryImage {
 export interface HistorySection {
   title?: string;
   description?: string;
+  body?: PortableTextBlock[];
   images?: HistoryImage[];
 }
 

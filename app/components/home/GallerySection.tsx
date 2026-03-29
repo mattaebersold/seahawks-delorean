@@ -106,8 +106,8 @@ export function GallerySection({ data }: Props) {
       <div className="max-w-wide mx-auto px-gutter">
         {(data?.title || data?.description) && (
           <div className="mb-xl text-center max-w-[700px] mx-auto">
-            {data.title && <h2 className="text-4xl mb-md">{data.title}</h2>}
-            {data.description && <p className="text-2xl text-black leading-relaxed">{data.description}</p>}
+            {data.title && <h3>{data.title}</h3>}
+            {data.description && <p className="text-lg">{data.description}</p>}
           </div>
         )}
 

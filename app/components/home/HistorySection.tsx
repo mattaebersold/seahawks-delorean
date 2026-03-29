@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { sanityImageUrl } from "~/sanity/lib/image";
+import { SanityContent } from "~/components/sanity/SanityContent";
 import type { HistorySection as HistorySectionType, HistoryImage } from "~/types/homeTypes";
 import { SECTION_IDS } from "~/types/homeTypes";
 
@@ -91,10 +92,17 @@ export function HistorySection({ data }: Props) {
       <div className="max-w-wide mx-auto px-gutter">
         {(data?.title || data?.description) && (
           <div className="mb-xl text-center max-w-[700px] mx-auto">
-            {data.title && <h2 className="text-4xl mb-md">{data.title}</h2>}
+            {data.title && <h3>{data.title}</h3>}
             {data.description && <p className="text-2xl text-black leading-relaxed">{data.description}</p>}
           </div>
         )}
+
+        {data?.body && (
+          <div className="columns-1 md:columns-2 gap-8 mb-xl">
+            <SanityContent value={data.body} />
+          </div>
+        )}
+
 
         {images.length > 0 ? (
           <div className="columns-1 md:columns-2 gap-3">

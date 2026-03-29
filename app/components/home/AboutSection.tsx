@@ -10,37 +10,11 @@ interface Props {
 
 export function AboutSection({ data }: Props) {
   return (
-    <section id={SECTION_IDS.about} className="py-2xl">
-      <div className="max-w-wide mx-auto px-gutter">
-        {(data?.title || data?.subtitle) && (
-          <div className="text-center mb-lg">
-            {data.title && <h2 className="text-4xl">{data.title}</h2>}
-            {data.subtitle && <p className="text-2xl mt-sm">{data.subtitle}</p>}
-          </div>
-        )}
+    <section id={SECTION_IDS.about} className="py-xl">
+      <div className="">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-lg items-center pt-lg">
-          {/* Image */}
-          {data?.image?.asset?.url && (
-            <div className="relative overflow-hidden rounded-card aspect-[4/5]">
-              <img
-                src={sanityImageUrl(data.image)
-                  .width(800)
-                  .height(1000)
-                  .fit("crop")
-                  .auto("format")
-                  .url()}
-                alt={data.imageAlt ?? ""}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </div>
-          )}
-
-          {/* Text content */}
-          <div>
-            {data?.body && <SanityContent value={data.body} />}
-            {data?.buttons && data.buttons.length > 0 && (
-              <div className="flex flex-wrap gap-md mt-lg">
+        {data?.buttons && data.buttons.length > 0 && (
+              <div className="text-center mb-lg">
                 {data.buttons.map((btn) => (
                   <Button key={btn._key} to={btn.href} variant={btn.variant ?? "primary"}>
                     {btn.text}
@@ -48,23 +22,53 @@ export function AboutSection({ data }: Props) {
                 ))}
               </div>
             )}
+        
+        <div className="relative px-4 max-w-wide mx-auto my-lg pt-lg">
+            <img
+              src={sanityImageUrl(data?.image)
+                .auto("format")
+                .url()}
+              alt={data?.imageAlt ?? ""}
+              className="block mx-auto rounded-card w-full h-auto"
+            />
+          </div>
+          
+        <div className="text-center mx-auto  pt-lg max-w-[800px] mx-auto px-gutter">
+
+          {/* Text content */}
+          <div>
+            {(data?.title) && (
+              <div className="mb-md">
+                {data.title && <h3>{data.title}</h3>}
+              </div>
+            )}
+            {data?.body && <div className="wys"><SanityContent value={data.body} /></div>}
+            
           </div>
         </div>
-
-        <div className="mt-xl md:pl-xl">
-          <ul className="grid grid-cols-2 md:grid-cols-3 gap-md w-11/12 max-w-[800px] mx-auto text-2xl list-disc list-outside">
-            <li>Themed Events</li>
-            <li>Company Events</li>
-            <li>Social Media Pics</li>
-            <li>Marketing Content</li>
-            <li>Birthday Parties</li>
-            <li>Holiday Events</li>
-            <li>Wedding Parties</li>
-            <li>Social Events</li>
-            <li>Photo Shoots</li>
-          </ul>
-        </div>
         
+      {/* 3-column grid beneath hero */}
+      {(data?.leftColumnText || data?.centerColumnImage || data?.rightColumnText) && (
+        <div className="bg-[#202020] p-4 md:p-12 my-xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-lg max-w-wide mx-auto items-center text-white">
+            {data.leftColumnText && (
+              <p className="text-lg px-6 leading-relaxed whitespace-pre-line">{data.leftColumnText}</p>
+            )}
+            {data.centerColumnImage?.asset?.url ? (
+              <img
+                src={sanityImageUrl(data.centerColumnImage).width(800).fit("max").auto("format").url()}
+                alt=""
+                className="w-[300px] mx-auto h-auto rounded-2xl"
+              />
+            ) : (
+              <div />
+            )}
+            {data.rightColumnText && (
+              <p className="text-lg px-6 leading-relaxed whitespace-pre-line">{data.rightColumnText}</p>
+            )}
+          </div>
+        </div>
+      )}        
       </div>
     </section>
   );

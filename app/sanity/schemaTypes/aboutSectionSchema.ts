@@ -23,6 +23,9 @@ export const aboutSectionSchema = defineType({
       type: "array",
       of: [{ type: "portableTextButton" }],
     }),
+    defineField({ name: "leftColumnText", title: "Left Column Text", type: "text" }),
+    defineField({ name: "centerColumnImage", title: "Center Column Image", type: "image", options: { hotspot: true } }),
+    defineField({ name: "rightColumnText", title: "Right Column Text", type: "text" }),
   ],
   preview: {
     select: {},

@@ -119,3 +119,11 @@ label {
 div[data-ui="ToolScreen"] {
   @apply h-screen overflow-auto;
 }
+
+
+.wys {
+  a {
+    color: blue;
+    text-decoration: underline;
+  }
+}

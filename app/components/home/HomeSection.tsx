@@ -4,6 +4,8 @@ import { sanityImageUrl } from "~/sanity/lib/image";
 import Button from "~/components/global/Button";
 import type { HomeSection as HomeSectionType } from "~/types/homeTypes";
 import { SECTION_IDS } from "~/types/homeTypes";
+import cards from "~/assets/cards.png";
+import desktop from "~/assets/desktop.jpg";
 
 interface Props {
   data?: HomeSectionType;
@@ -27,7 +29,7 @@ export function HomeSection({ data }: Props) {
     <>
       <section
         id={SECTION_IDS.home}
-        className="relative h-screen flex flex-col items-center justify-center overflow-hidden text-white"
+        className="relative h-[80vh] flex flex-col items-center justify-center overflow-hidden text-white"
       >
         {/* Background image marquee — all images stacked, cross-fade via opacity */}
         <div className="absolute inset-0">
@@ -117,28 +119,35 @@ export function HomeSection({ data }: Props) {
       </section>
 
 
-      {/* 3-column grid beneath hero */}
-      {(data?.leftColumnText || data?.centerColumnImage || data?.rightColumnText) && (
-        <div className="bg-[#202020] p-4 md:p-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-lg max-w-wide mx-auto items-center text-white">
-            {data.leftColumnText && (
-              <p className="text-lg px-6 leading-relaxed whitespace-pre-line">{data.leftColumnText}</p>
-            )}
-            {data.centerColumnImage?.asset?.url ? (
-              <img
-                src={sanityImageUrl(data.centerColumnImage).width(800).fit("max").auto("format").url()}
-                alt=""
-                className="w-[300px] mx-auto h-auto rounded-2xl"
-              />
-            ) : (
-              <div />
-            )}
-            {data.rightColumnText && (
-              <p className="text-lg px-6 leading-relaxed whitespace-pre-line">{data.rightColumnText}</p>
-            )}
+        <div className="pt-xl pb-lg">
+          <div className="text-center mb-lg">
+            <h3>Have Time - Will Travel</h3>
+            <p className="max-w-[800px] px-md mx-auto">Hire the Seahawks Delorean for up to four (4) hours for a ride-along and/or to have it available for a Seahawks party, birthday party, music video, graduation, tailgate party, photo shoot, video promotion, convention, or other special event. The Seahawks Delorean team have experience integrating the car into unique parties and events, and they provide an experienced Delorean driver as needed for on-site movement and parades. 
+Whether it's the centerpiece of your event or a memorable backdrop for photos, this one-of-a-kind experience adds a touch of nostalgia, style, and excitement your guests won’t soon forget.</p>
           </div>
+          <img src={cards} className="block mx-auto md:hidden" />
+          <img src={desktop} className="hidden md:block mx-auto" />
+
+          <div className="w-3/4 max-w-[550px] text-center mx-auto">
+            <p className="text-xl pt-lg">The Seahawks Delorean Car and Trailer are Available for Hire - for appearances in greater King County, Washington area.</p>
+            <p className="text-sm italic text-black/50 max-w-[400px] mx-auto ">*This is for an appearance or possible a ride-along as in a parade - Not to drive the car. The Trailer cannot be used for riding in.</p>
+          </div>
+
         </div>
-      )}
+
+        <div className="md:pl-xl max-w-wide mx-auto px-gutter">
+          <ul className="grid grid-cols-2 md:grid-cols-3 gap-md w-11/12 max-w-[800px] mx-auto text-2xl list-disc list-outside">
+            <li>Themed Events</li>
+            <li>Company Events</li>
+            <li>Social Media Pics</li>
+            <li>Marketing Content</li>
+            <li>Birthday Parties</li>
+            <li>Holiday Events</li>
+            <li>Wedding Parties</li>
+            <li>Social Events</li>
+            <li>Photo Shoots</li>
+          </ul>
+        </div>
 
     </>
   );

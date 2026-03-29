@@ -10,6 +10,12 @@ export const historySectionSchema = defineType({
     defineField({ name: "title", title: "Title", type: "string" }),
     defineField({ name: "description", title: "Description", type: "text" }),
     defineField({
+      name: "body",
+      title: "Body",
+      type: "array",
+      of: [{ type: "block" }],
+    }),
+    defineField({
       name: "images",
       title: "History Images",
       type: "array",

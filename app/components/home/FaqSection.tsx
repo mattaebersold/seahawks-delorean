@@ -16,8 +16,8 @@ export function FaqSection({ data }: Props) {
       <div className="max-w-wide mx-auto px-gutter">
         {(data.title || data.subtitle) && (
           <div className="text-center mb-lg">
-            {data.title && <h2 className="text-4xl">{data.title}</h2>}
-            {data.subtitle && <p className="text-xl mt-sm">{data.subtitle}</p>}
+            {data.title && <h3>{data.title}</h3>}
+            {data.subtitle && <p className="text-lg mt-sm">{data.subtitle}</p>}
           </div>
         )}
         <div className="flex gap-md flex-wrap pt-lg">
