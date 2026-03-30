@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { PortableText } from "@portabletext/react";
 import { sanityImageUrl } from "~/sanity/lib/image";
 import Button from "~/components/global/Button";
 import type { HomeSection as HomeSectionType } from "~/types/homeTypes";
@@ -122,32 +123,39 @@ export function HomeSection({ data }: Props) {
         <div className="pt-xl pb-lg">
           <div className="text-center mb-lg">
             <h3>Have Time - Will Travel</h3>
-            <p className="max-w-[800px] px-md mx-auto">Hire the Seahawks Delorean for up to four (4) hours for a ride-along and/or to have it available for a Seahawks party, birthday party, music video, graduation, tailgate party, photo shoot, video promotion, convention, or other special event. The Seahawks Delorean team have experience integrating the car into unique parties and events, and they provide an experienced Delorean driver as needed for on-site movement and parades. 
-Whether it's the centerpiece of your event or a memorable backdrop for photos, this one-of-a-kind experience adds a touch of nostalgia, style, and excitement your guests won’t soon forget.</p>
+            {data?.bottomText && data.bottomText.length > 0 && (
+              <div className="max-w-[800px] px-md mx-auto">
+                <PortableText value={data.bottomText} />
+              </div>
+            )}
           </div>
           <img src={cards} className="block mx-auto md:hidden" />
           <img src={desktop} className="hidden md:block mx-auto" />
 
           <div className="w-3/4 max-w-[550px] text-center mx-auto">
-            <p className="text-xl pt-lg">The Seahawks Delorean Car and Trailer are Available for Hire - for appearances in greater King County, Washington area.</p>
-            <p className="text-sm italic text-black/50 max-w-[400px] mx-auto ">*This is for an appearance or possible a ride-along as in a parade - Not to drive the car. The Trailer cannot be used for riding in.</p>
+            {data?.heroText && data.heroText.length > 0 && (
+              <div className="text-xl pt-lg">
+                <PortableText value={data.heroText} />
+              </div>
+            )}
+            {data?.heroDisclaimer && data.heroDisclaimer.length > 0 && (
+              <div className="text-sm italic text-black/50 max-w-[400px] mx-auto">
+                <PortableText value={data.heroDisclaimer} />
+              </div>
+            )}
           </div>
 
         </div>
 
-        <div className="md:pl-xl max-w-wide mx-auto px-gutter">
-          <ul className="grid grid-cols-2 md:grid-cols-3 gap-md w-11/12 max-w-[800px] mx-auto text-2xl list-disc list-outside">
-            <li>Themed Events</li>
-            <li>Company Events</li>
-            <li>Social Media Pics</li>
-            <li>Marketing Content</li>
-            <li>Birthday Parties</li>
-            <li>Holiday Events</li>
-            <li>Wedding Parties</li>
-            <li>Social Events</li>
-            <li>Photo Shoots</li>
-          </ul>
-        </div>
+        {data?.eventTypes && data.eventTypes.length > 0 && (
+          <div className="md:pl-xl max-w-wide mx-auto px-gutter">
+            <ul className="grid grid-cols-2 md:grid-cols-3 gap-md w-11/12 max-w-[800px] mx-auto text-2xl list-disc list-outside">
+              {data.eventTypes.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
 
     </>
   );
