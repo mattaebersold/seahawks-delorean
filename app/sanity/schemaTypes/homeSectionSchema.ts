@@ -45,6 +45,12 @@ export const homeSectionSchema = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: "underImageText",
+      title: "Under Image Text",
+      description: "Text displayed directly below the foreground image.",
+      type: "string",
+    }),
+    defineField({
       name: "bottomText",
       title: "Bottom Text",
       type: "array",

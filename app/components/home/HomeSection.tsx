@@ -88,9 +88,9 @@ export function HomeSection({ data }: Props) {
               className="my-md w-11/12 h-auto max-w-[500px]"
             />
           )}
-          {data?.bottomText && (
-            <p className="text-white text-3xl">{data.bottomText}</p>
-          )}
+          {data?.underImageText && (
+              <p className="text-white text-3xl">{data.underImageText}</p>
+            )}
           {data?.buttons && data.buttons.length > 0 && (
             <div className="flex flex-wrap gap-md justify-center mt-lg">
               {data.buttons.map((btn) => (

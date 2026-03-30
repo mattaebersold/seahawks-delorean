@@ -35,6 +35,7 @@ export interface HomeSection {
   title?: string;
   subtitle?: string;
   foregroundImage?: SanityImageWithAsset;
+  underImageText?: string;
   bottomText?: PortableTextBlock[];
   heroText?: PortableTextBlock[];
   heroDisclaimer?: PortableTextBlock[];

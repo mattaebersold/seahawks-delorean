@@ -206,6 +206,7 @@ export const HOME_PAGE_QUERY = groq`{
     title,
     subtitle,
     foregroundImage ${_imageWithAsset},
+    underImageText,
     bottomText[]{...,},
     heroText[]{...,},
     heroDisclaimer[]{...,},
