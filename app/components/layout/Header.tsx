@@ -79,7 +79,7 @@ export function Header({ title, logoUrl, facebookUrl }: HeaderProps) {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-30 bg-black/70 backdrop-blur-md">
-        <div className="flex items-center justify-between p-6">
+        <div className="flex items-center justify-between px-4 py-3">
           {/* Logo */}
           <button
             onClick={() => handleSectionClick("home")}

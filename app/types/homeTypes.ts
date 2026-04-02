@@ -37,10 +37,18 @@ export interface HomeSection {
   foregroundImage?: SanityImageWithAsset;
   underImageText?: string;
   bottomText?: PortableTextBlock[];
-  heroText?: PortableTextBlock[];
-  heroDisclaimer?: PortableTextBlock[];
-  eventTypes?: string[];
   buttons?: SanityButton[];
+}
+
+export interface ForHireSection {
+  title?: string;
+  body?: PortableTextBlock[];
+  image1?: SanityImageWithAsset;
+  image2?: SanityImageWithAsset;
+  image3?: SanityImageWithAsset;
+  bottomText?: PortableTextBlock[];
+  bottomDisclaimerText?: PortableTextBlock[];
+  eventTypes?: string[];
 }
 
 export interface AboutSection {
@@ -97,6 +105,7 @@ export interface HomePage {
   homeSection?: HomeSection;
   aboutSection?: AboutSection;
   gallerySection?: GallerySection;
+  forHireSection?: ForHireSection;
   historySection?: HistorySection;
   faqSection?: FaqSection;
   bookSection?: BookSection;
@@ -106,6 +115,7 @@ export const SECTION_IDS = {
   home: "section-home",
   about: "section-about",
   gallery: "section-gallery",
+  forHire: "section-for-hire",
   history: "section-history",
   faq: "section-faq",
   book: "section-book",
@@ -117,7 +127,8 @@ export const NAV_SECTIONS: Array<{ id: SectionKey; label: string }> = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "gallery", label: "Gallery" },
-  { id: "history", label: "IN2TIME" },
-  { id: "book", label: "Contact/Reserve" },
+  { id: "forHire", label: "For Hire" },
+  { id: "history", label: "History" },
+  { id: "book", label: "Contact/Hire" },
   { id: "faq", label: "FAQ" },
 ];

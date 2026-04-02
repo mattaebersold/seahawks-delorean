@@ -57,27 +57,6 @@ export const homeSectionSchema = defineType({
       of: [{ type: "block" }],
     }),
     defineField({
-      name: "heroText",
-      title: "Hero Text",
-      description: "Main paragraph displayed below the hero images.",
-      type: "array",
-      of: [{ type: "block" }],
-    }),
-    defineField({
-      name: "heroDisclaimer",
-      title: "Hero Disclaimer",
-      description: "Small italic disclaimer text below the hero text.",
-      type: "array",
-      of: [{ type: "block" }],
-    }),
-    defineField({
-      name: "eventTypes",
-      title: "Event Types",
-      description: "List of event types displayed in the grid.",
-      type: "array",
-      of: [{ type: "string" }],
-    }),
-    defineField({
       name: "buttons",
       title: "Buttons",
       type: "array",

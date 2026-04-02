@@ -23,15 +23,7 @@ export function AboutSection({ data }: Props) {
               </div>
             )}
         
-        <div className="relative px-4 max-w-wide mx-auto my-lg pt-lg">
-            <img
-              src={sanityImageUrl(data?.image)
-                .auto("format")
-                .url()}
-              alt={data?.imageAlt ?? ""}
-              className="block mx-auto rounded-card w-full h-auto"
-            />
-          </div>
+
           
         <div className="text-center mx-auto  pt-lg max-w-[800px] mx-auto px-gutter">
 
@@ -46,6 +38,16 @@ export function AboutSection({ data }: Props) {
             
           </div>
         </div>
+
+                <div className="relative px-4 max-w-wide mx-auto my-lg pt-lg">
+            <img
+              src={sanityImageUrl(data?.image)
+                .auto("format")
+                .url()}
+              alt={data?.imageAlt ?? ""}
+              className="block mx-auto rounded-card w-full h-auto"
+            />
+          </div>
         
       {/* 3-column grid beneath hero */}
       {(data?.leftColumnText || data?.centerColumnImage || data?.rightColumnText) && (

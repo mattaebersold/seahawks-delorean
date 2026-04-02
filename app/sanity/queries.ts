@@ -208,9 +208,6 @@ export const HOME_PAGE_QUERY = groq`{
     foregroundImage ${_imageWithAsset},
     underImageText,
     bottomText[]{...,},
-    heroText[]{...,},
-    heroDisclaimer[]{...,},
-    eventTypes,
     ${_buttons}
   },
   "aboutSection": *[_type == "aboutSection"][0]{
@@ -232,6 +229,16 @@ export const HOME_PAGE_QUERY = groq`{
       image ${_imageWithAsset},
       caption
     }
+  },
+  "forHireSection": *[_type == "forHireSection"][0]{
+    title,
+    body[]{...,},
+    image1 ${_imageWithAsset},
+    image2 ${_imageWithAsset},
+    image3 ${_imageWithAsset},
+    bottomText[]{...,},
+    bottomDisclaimerText[]{...,},
+    eventTypes
   },
   "historySection": *[_type == "historySection"][0]{
     title,

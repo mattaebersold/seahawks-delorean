@@ -31,7 +31,7 @@
   --spacing-header: 72px;
   --spacing-gutter: 1rem;
 
-  --radius-card: 24px;
+  --radius-card: 12px;
 }
 
 html,
@@ -112,7 +112,10 @@ label {
 #section-home,
 #section-about,
 #section-gallery,
-#section-book {
+#section-for-hire,
+#section-history,
+#section-book,
+#section-faq {
   scroll-margin-top: var(--spacing-header);
 }
 

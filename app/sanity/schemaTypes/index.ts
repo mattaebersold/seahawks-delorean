@@ -3,6 +3,7 @@ import { articleSchema } from "./articleSchema";
 import { homeSectionSchema } from "./homeSectionSchema";
 import { aboutSectionSchema } from "./aboutSectionSchema";
 import { gallerySectionSchema } from "./gallerySectionSchema";
+import { forHireSectionSchema } from "./forHireSectionSchema";
 import { historySectionSchema } from "./historySectionSchema";
 import { bookSectionSchema } from "./bookSectionSchema";
 import { faqSectionSchema } from "./faqSectionSchema";
@@ -21,6 +22,7 @@ export default [
   homeSectionSchema,
   aboutSectionSchema,
   gallerySectionSchema,
+  forHireSectionSchema,
   historySectionSchema,
   bookSectionSchema,
   faqSectionSchema,

@@ -120,7 +120,7 @@ export function HomeSection({ data }: Props) {
       </section>
 
 
-        <div className="pt-xl pb-lg">
+        {/* <div className="pt-xl pb-lg">
           <div className="text-center mb-lg">
             <h3>Have Time - Will Travel</h3>
             {data?.bottomText && data.bottomText.length > 0 && (
@@ -132,30 +132,7 @@ export function HomeSection({ data }: Props) {
           <img src={cards} className="block mx-auto md:hidden" />
           <img src={desktop} className="hidden md:block mx-auto" />
 
-          <div className="w-3/4 max-w-[550px] text-center mx-auto">
-            {data?.heroText && data.heroText.length > 0 && (
-              <div className="text-xl pt-lg">
-                <PortableText value={data.heroText} />
-              </div>
-            )}
-            {data?.heroDisclaimer && data.heroDisclaimer.length > 0 && (
-              <div className="text-sm italic text-black/50 max-w-[400px] mx-auto">
-                <PortableText value={data.heroDisclaimer} />
-              </div>
-            )}
-          </div>
-
-        </div>
-
-        {data?.eventTypes && data.eventTypes.length > 0 && (
-          <div className="md:pl-xl max-w-wide mx-auto px-gutter">
-            <ul className="grid grid-cols-2 md:grid-cols-3 gap-md w-11/12 max-w-[800px] mx-auto text-2xl list-disc list-outside">
-              {data.eventTypes.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+        </div> */}
 
     </>
   );

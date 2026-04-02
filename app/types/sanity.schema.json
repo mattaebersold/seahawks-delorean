@@ -2422,6 +2422,13 @@
         },
         "optional": true
       },
+      "underImageText": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "bottomText": {
         "type": "objectAttribute",
         "value": {

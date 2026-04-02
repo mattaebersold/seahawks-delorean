@@ -28,6 +28,7 @@ export const structure: StructureResolver = (S) =>
       singletonItem(S, "homeSection", "Hero"),
       singletonItem(S, "aboutSection", "About"),
       singletonItem(S, "gallerySection", "Gallery"),
+      singletonItem(S, "forHireSection", "For Hire"),
       singletonItem(S, "historySection", "History"),
       singletonItem(S, "bookSection", "Book Appointment"),
       singletonItem(S, "faqSection", "FAQ"),
