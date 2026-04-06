@@ -90,19 +90,52 @@ export function HistorySection({ data }: Props) {
   return (
     <section id={SECTION_IDS.history} className="py-2xl">
       <div className="max-w-wide mx-auto px-gutter">
-        {(data?.title || data?.description) && (
+        {data?.title && (
           <div className="mb-xl text-center max-w-[700px] mx-auto">
-            {data.title && <h3>{data.title}</h3>}
-            {data.description && <p className="text-2xl text-black leading-relaxed">{data.description}</p>}
+            <h3>{data.title}</h3>
           </div>
         )}
 
-        {data?.body && (
-          <div className="columns-1 md:columns-2 gap-8 mb-xl">
-            <SanityContent value={data.body} />
+        {/* Alternating 50/50 rows */}
+        {(data?.rowOneBody || data?.rowOneImage || data?.rowTwoImage || data?.rowTwoBody) && (
+          <div className="mb-xl">
+            {/* Row 1: text left, image right */}
+            {(data?.rowOneBody || data?.rowOneImage) && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-xl">
+                {data.rowOneBody && (
+                  <div className="wys">
+                    <SanityContent value={data.rowOneBody} />
+                  </div>
+                )}
+                {data.rowOneImage?.asset?.url && (
+                  <img
+                    src={sanityImageUrl(data.rowOneImage).auto("format").width(900).fit("max").url()}
+                    alt={data.rowOneImageAlt ?? ""}
+                    className="w-full h-auto rounded-card"
+                  />
+                )}
+              </div>
+            )}
+
+            {/* Row 2: image left, text right */}
+            {(data?.rowTwoImage || data?.rowTwoBody) && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-xl">
+                {data.rowTwoImage?.asset?.url && (
+                  <img
+                    src={sanityImageUrl(data.rowTwoImage).auto("format").width(900).fit("max").url()}
+                    alt={data.rowTwoImageAlt ?? ""}
+                    className="w-full h-auto rounded-card"
+                  />
+                )}
+                {data.rowTwoBody && (
+                  <div className="wys">
+                    <SanityContent value={data.rowTwoBody} />
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
-
 
         {images.length > 0 ? (
           <div className="columns-1 sm:columns-2 md:columns-3 gap-3">

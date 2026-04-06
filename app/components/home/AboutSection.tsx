@@ -1,6 +1,5 @@
 import { sanityImageUrl } from "~/sanity/lib/image";
 import { SanityContent } from "~/components/sanity/SanityContent";
-import Button from "~/components/global/Button";
 import type { AboutSection as AboutSectionType } from "~/types/homeTypes";
 import { SECTION_IDS } from "~/types/homeTypes";
 
@@ -13,31 +12,11 @@ export function AboutSection({ data }: Props) {
     <section id={SECTION_IDS.about} className="py-xl">
       <div className="">
 
-        {data?.buttons && data.buttons.length > 0 && (
-              <div className="text-center mb-lg">
-                {data.buttons.map((btn) => (
-                  <Button key={btn._key} to={btn.href} variant={btn.variant ?? "primary"}>
-                    {btn.text}
-                  </Button>
-                ))}
-              </div>
-            )}
-        
-
-          
-        <div className="text-center mx-auto  pt-lg max-w-[800px] mx-auto px-gutter">
-
-          {/* Text content */}
-          <div>
-            {(data?.title) && (
-              <div className="mb-md">
-                {data.title && <h3>{data.title}</h3>}
-              </div>
-            )}
-            {data?.body && <div className="wys"><SanityContent value={data.body} /></div>}
-            
+        {data?.title && (
+          <div className="text-center pt-lg max-w-[800px] mx-auto px-gutter mb-md">
+            <h3>{data.title}</h3>
           </div>
-        </div>
+        )}
 
                 <div className="relative px-4 max-w-wide mx-auto my-lg pt-lg">
             <img
@@ -49,28 +28,46 @@ export function AboutSection({ data }: Props) {
             />
           </div>
         
-      {/* 3-column grid beneath hero */}
-      {(data?.leftColumnText || data?.centerColumnImage || data?.rightColumnText) && (
-        <div className="bg-[#202020] p-4 md:p-12 my-xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-lg max-w-wide mx-auto items-center text-white">
-            {data.leftColumnText && (
-              <p className="text-lg px-6 leading-relaxed whitespace-pre-line">{data.leftColumnText}</p>
-            )}
-            {data.centerColumnImage?.asset?.url ? (
-              <img
-                src={sanityImageUrl(data.centerColumnImage).width(800).fit("max").auto("format").url()}
-                alt=""
-                className="w-[300px] mx-auto h-auto rounded-2xl"
-              />
-            ) : (
-              <div />
-            )}
-            {data.rightColumnText && (
-              <p className="text-lg px-6 leading-relaxed whitespace-pre-line">{data.rightColumnText}</p>
-            )}
-          </div>
+      {/* Alternating 50/50 rows */}
+      {(data?.rowOneBody || data?.rowOneImage || data?.rowTwoImage || data?.rowTwoBody) && (
+        <div className="max-w-wide mx-auto px-gutter">
+          {/* Row 1: text left, image right */}
+          {(data?.rowOneBody || data?.rowOneImage) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-xl">
+              {data.rowOneBody && (
+                <div className="wys">
+                  <SanityContent value={data.rowOneBody} />
+                </div>
+              )}
+              {data.rowOneImage?.asset?.url && (
+                <img
+                  src={sanityImageUrl(data.rowOneImage).auto("format").width(900).fit("max").url()}
+                  alt={data.rowOneImageAlt ?? ""}
+                  className="w-full h-auto rounded-card"
+                />
+              )}
+            </div>
+          )}
+
+          {/* Row 2: image left, text right */}
+          {(data?.rowTwoImage || data?.rowTwoBody) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-xl">
+              {data.rowTwoImage?.asset?.url && (
+                <img
+                  src={sanityImageUrl(data.rowTwoImage).auto("format").width(900).fit("max").url()}
+                  alt={data.rowTwoImageAlt ?? ""}
+                  className="w-full h-auto rounded-card"
+                />
+              )}
+              {data.rowTwoBody && (
+                <div className="wys">
+                  <SanityContent value={data.rowTwoBody} />
+                </div>
+              )}
+            </div>
+          )}
         </div>
-      )}        
+      )}
       </div>
     </section>
   );

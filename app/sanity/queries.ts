@@ -214,12 +214,12 @@ export const HOME_PAGE_QUERY = groq`{
     image ${_imageWithAsset},
     imageAlt,
     title,
-    subtitle,
-    body,
-    leftColumnText,
-    centerColumnImage ${_imageWithAsset},
-    rightColumnText,
-    ${_buttons}
+    rowOneBody,
+    rowOneImage ${_imageWithAsset},
+    rowOneImageAlt,
+    rowTwoImage ${_imageWithAsset},
+    rowTwoImageAlt,
+    rowTwoBody,
   },
   "gallerySection": *[_type == "gallerySection"][0]{
     title,
@@ -242,8 +242,12 @@ export const HOME_PAGE_QUERY = groq`{
   },
   "historySection": *[_type == "historySection"][0]{
     title,
-    description,
-    body,
+    rowOneBody,
+    rowOneImage ${_imageWithAsset},
+    rowOneImageAlt,
+    rowTwoImage ${_imageWithAsset},
+    rowTwoImageAlt,
+    rowTwoBody,
     images[]{
       _key,
       image ${_imageWithAsset},

@@ -55,12 +55,12 @@ export interface AboutSection {
   image?: SanityImageWithAsset;
   imageAlt?: string;
   title?: string;
-  subtitle?: string;
-  body?: PortableTextBlock[];
-  buttons?: SanityButton[];
-  leftColumnText?: string;
-  centerColumnImage?: SanityImageWithAsset;
-  rightColumnText?: string;
+  rowOneBody?: PortableTextBlock[];
+  rowOneImage?: SanityImageWithAsset;
+  rowOneImageAlt?: string;
+  rowTwoImage?: SanityImageWithAsset;
+  rowTwoImageAlt?: string;
+  rowTwoBody?: PortableTextBlock[];
 }
 
 export interface GallerySection {
@@ -78,8 +78,12 @@ export interface HistoryImage {
 
 export interface HistorySection {
   title?: string;
-  description?: string;
-  body?: PortableTextBlock[];
+  rowOneBody?: PortableTextBlock[];
+  rowOneImage?: SanityImageWithAsset;
+  rowOneImageAlt?: string;
+  rowTwoImage?: SanityImageWithAsset;
+  rowTwoImageAlt?: string;
+  rowTwoBody?: PortableTextBlock[];
   images?: HistoryImage[];
 }
 
