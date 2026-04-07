@@ -74,7 +74,7 @@ function ContactUsForm() {
       method="POST"
       data-netlify="true"
       onSubmit={handleSubmit}
-      className="flex flex-col gap-md bg-white/5 rounded-card p-md"
+      className="flex flex-col gap-sm bg-white/5 rounded-card p-sm"
     >
       <input type="hidden" name="form-name" value={CONTACT_FORM_NAME} />
 
@@ -153,7 +153,7 @@ function BookAppointmentForm() {
       method="POST"
       data-netlify="true"
       onSubmit={handleSubmit}
-      className="flex flex-col gap-md bg-white/5 rounded-card p-md"
+      className="flex flex-col gap-sm bg-white/5 rounded-card p-sm"
     >
       <input type="hidden" name="form-name" value={BOOK_FORM_NAME} />
 
