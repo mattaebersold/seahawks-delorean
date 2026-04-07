@@ -121,7 +121,7 @@ export function HomeSection({ data }: Props) {
 
 
         {/* <div className="pt-xl pb-lg">
-          <div className="text-center mb-lg">
+          <div className="text-center mb-md">
             <h3>Have Time - Will Travel</h3>
             {data?.bottomText && data.bottomText.length > 0 && (
               <div className="max-w-[800px] px-md mx-auto">

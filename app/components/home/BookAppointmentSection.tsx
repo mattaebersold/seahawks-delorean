@@ -74,7 +74,7 @@ function ContactUsForm() {
       method="POST"
       data-netlify="true"
       onSubmit={handleSubmit}
-      className="flex flex-col gap-md bg-white/5 rounded-card p-lg"
+      className="flex flex-col gap-md bg-white/5 rounded-card p-md"
     >
       <input type="hidden" name="form-name" value={CONTACT_FORM_NAME} />
 
@@ -97,7 +97,7 @@ function ContactUsForm() {
       </div>
 
       <Field id="contactMessage" label="Message" required>
-        <textarea id="contactMessage" name="message" rows={5} required className="resize-y" />
+        <textarea id="contactMessage" name="message" rows={4} required className="resize-y" />
       </Field>
 
       {error && (
@@ -153,7 +153,7 @@ function BookAppointmentForm() {
       method="POST"
       data-netlify="true"
       onSubmit={handleSubmit}
-      className="flex flex-col gap-md bg-white/5 rounded-card p-lg"
+      className="flex flex-col gap-md bg-white/5 rounded-card p-md"
     >
       <input type="hidden" name="form-name" value={BOOK_FORM_NAME} />
 
@@ -310,15 +310,15 @@ export function BookAppointmentSection({ data }: Props) {
   const [activeForm, setActiveForm] = useState<ActiveForm>("contact");
 
   return (
-    <section id={SECTION_IDS.book} className="py-2xl">
+    <section id={SECTION_IDS.book} className="py-xl">
       <div className="max-w-wide mx-auto px-gutter">
 
-        <div className="text-center mb-lg">
+        <div className="text-center mb-md">
           {data?.title && <h3>{data.title}</h3>}
           {data?.body && <SanityContent value={data.body} />}
         </div>
 
-        <div className="max-w-[800px] mx-auto mt-[100px]">
+        <div className="max-w-[800px] mx-auto mt-[60px]">
           {/* Toggle switcher */}
           <div className="flex justify-center mb-xl">
             <div className="relative flex bg-black/10 rounded-full p-1 w-[480px]">

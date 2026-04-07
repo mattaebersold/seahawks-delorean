@@ -102,7 +102,7 @@ export function GallerySection({ data }: Props) {
   const images = data?.images ?? [];
 
   return (
-    <section id={SECTION_IDS.gallery} className="py-2xl">
+    <section id={SECTION_IDS.gallery} className="py-xl">
       <div className="max-w-wide mx-auto px-gutter">
         {(data?.title || data?.description) && (
           <div className="mb-xl text-center max-w-[700px] mx-auto">

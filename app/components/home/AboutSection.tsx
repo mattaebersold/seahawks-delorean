@@ -33,7 +33,7 @@ export function AboutSection({ data }: Props) {
         <div className="max-w-wide mx-auto px-gutter">
           {/* Row 1: text left, image right */}
           {(data?.rowOneBody || data?.rowOneImage) && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-lg">
               {data.rowOneBody && (
                 <div className="wys">
                   <SanityContent value={data.rowOneBody} />
@@ -51,7 +51,7 @@ export function AboutSection({ data }: Props) {
 
           {/* Row 2: image left, text right */}
           {(data?.rowTwoImage || data?.rowTwoBody) && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-lg">
               {data.rowTwoImage?.asset?.url && (
                 <img
                   src={sanityImageUrl(data.rowTwoImage).auto("format").width(900).fit("max").url()}

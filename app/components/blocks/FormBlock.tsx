@@ -71,7 +71,7 @@ export default function FormBlock({
                 name={field.name}
                 placeholder={field.placeholder}
                 required={field.required}
-                rows={5}
+                rows={4}
                 className="resize-y"
               />
             ) : field.type === "select" ? (

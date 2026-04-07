@@ -88,7 +88,7 @@ export function HistorySection({ data }: Props) {
   const images = data?.images ?? [];
 
   return (
-    <section id={SECTION_IDS.history} className="py-2xl">
+    <section id={SECTION_IDS.history} className="py-xl">
       <div className="max-w-wide mx-auto px-gutter">
         {data?.title && (
           <div className="mb-xl text-center max-w-[700px] mx-auto">
@@ -101,7 +101,7 @@ export function HistorySection({ data }: Props) {
           <div className="mb-xl">
             {/* Row 1: text left, image right */}
             {(data?.rowOneBody || data?.rowOneImage) && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-lg">
                 {data.rowOneBody && (
                   <div className="wys">
                     <SanityContent value={data.rowOneBody} />
@@ -119,7 +119,7 @@ export function HistorySection({ data }: Props) {
 
             {/* Row 2: image left, text right */}
             {(data?.rowTwoImage || data?.rowTwoBody) && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center py-lg">
                 {data.rowTwoImage?.asset?.url && (
                   <img
                     src={sanityImageUrl(data.rowTwoImage).auto("format").width(900).fit("max").url()}

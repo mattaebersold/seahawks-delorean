@@ -85,7 +85,7 @@ export function ForHireSection({ data }: Props) {
   );
 
   return (
-    <section id={SECTION_IDS.forHire} className="py-2xl">
+    <section id={SECTION_IDS.forHire} className="py-xl">
       <div className="max-w-wide mx-auto px-gutter">
         {data?.title && (
           <div className="mb-xl text-center max-w-[700px] mx-auto">

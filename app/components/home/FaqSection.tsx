@@ -15,7 +15,7 @@ export function FaqSection({ data }: Props) {
     <section id={SECTION_IDS.faq} className="py-xl w-11/12 mx-auto max-w-[800px]">
       <div className="max-w-wide mx-auto px-gutter">
         {(data.title || data.subtitle) && (
-          <div className="text-center mb-lg">
+          <div className="text-center mb-md">
             {data.title && <h3>{data.title}</h3>}
             {data.subtitle && <p className="text-lg mt-sm">{data.subtitle}</p>}
           </div>
