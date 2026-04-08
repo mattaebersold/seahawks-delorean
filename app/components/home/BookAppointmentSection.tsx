@@ -17,11 +17,13 @@ function Field({
   id,
   label,
   required,
+  error,
   children,
 }: {
   id: string;
   label: string;
   required?: boolean;
+  error?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -31,6 +33,7 @@ function Field({
         {required && <span className="text-red ml-1">*</span>}
       </label>
       {children}
+      {error && <span className="text-red text-xs mt-1">{error}</span>}
     </div>
   );
 }
@@ -113,18 +116,68 @@ function ContactUsForm() {
   );
 }
 
+const REQUIRED_FIELDS: Record<string, string> = {
+  firstName: "First Name is required",
+  lastName: "Last Name is required",
+  email: "Email is required",
+  phone: "Phone is required",
+  subject: "Subject is required",
+  message: "Message is required",
+  address: "Address is required",
+  city: "City is required",
+  county: "County is required",
+  state: "State is required",
+  eventType: "Event Type is required",
+  eventStartDate: "Event Start Date is required",
+  eventEndDate: "Event End Date is required",
+};
+
 function BookAppointmentForm() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [sponsorName, setSponsorName] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  function clearError(name: string) {
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => { const next = { ...prev }; delete next[name]; return next; });
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const errors: Record<string, string> = {};
+
+    for (const [field, message] of Object.entries(REQUIRED_FIELDS)) {
+      if (!formData.get(field)?.toString().trim()) {
+        errors[field] = message;
+      }
+    }
+
+    if (sponsorName.trim()) {
+      for (const [field, label] of [
+        ["sponsorFirstName", "First Name"],
+        ["sponsorLastName", "Last Name"],
+        ["sponsorEmail", "Email"],
+        ["sponsorPhone", "Phone"],
+      ] as [string, string][]) {
+        if (!formData.get(field)?.toString().trim()) {
+          errors[field] = `${label} is required`;
+        }
+      }
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+
+    setFieldErrors({});
     setLoading(true);
     setError(false);
     try {
-      const formData = new FormData(e.currentTarget);
       const res = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -161,29 +214,29 @@ function BookAppointmentForm() {
       <h4 className="uppercase tracking-wide border-b border-black/20 pb-sm">Your Contact Info</h4>
 
       <div className="grid grid-cols-2 gap-md">
-        <Field id="firstName" label="First Name" required>
-          <input id="firstName" name="firstName" type="text" required />
+        <Field id="firstName" label="First Name" required error={fieldErrors.firstName}>
+          <input id="firstName" name="firstName" type="text" onChange={() => clearError("firstName")} />
         </Field>
-        <Field id="lastName" label="Last Name" required>
-          <input id="lastName" name="lastName" type="text" required />
+        <Field id="lastName" label="Last Name" required error={fieldErrors.lastName}>
+          <input id="lastName" name="lastName" type="text" onChange={() => clearError("lastName")} />
         </Field>
       </div>
 
       <div className="grid grid-cols-2 gap-md">
-        <Field id="email" label="Email" required>
-          <input id="email" name="email" type="email" required />
+        <Field id="email" label="Email" required error={fieldErrors.email}>
+          <input id="email" name="email" type="email" onChange={() => clearError("email")} />
         </Field>
-        <Field id="phone" label="Phone" required>
-          <input id="phone" name="phone" type="tel" required />
+        <Field id="phone" label="Phone" required error={fieldErrors.phone}>
+          <input id="phone" name="phone" type="tel" onChange={() => clearError("phone")} />
         </Field>
       </div>
 
-      <Field id="subject" label="Subject" required>
-        <input id="subject" name="subject" type="text" required />
+      <Field id="subject" label="Subject" required error={fieldErrors.subject}>
+        <input id="subject" name="subject" type="text" onChange={() => clearError("subject")} />
       </Field>
 
-      <Field id="message" label="Message" required>
-        <textarea id="message" name="message" rows={4} required className="resize-y" />
+      <Field id="message" label="Message" required error={fieldErrors.message}>
+        <textarea id="message" name="message" rows={4} className="resize-y" onChange={() => clearError("message")} />
       </Field>
 
       {/* ── EVENT SPONSOR ── */}
@@ -204,19 +257,19 @@ function BookAppointmentForm() {
       {sponsorName.trim() && (
         <>
           <div className="grid grid-cols-2 gap-md">
-            <Field id="sponsorFirstName" label="First Name" required>
-              <input id="sponsorFirstName" name="sponsorFirstName" type="text" required />
+            <Field id="sponsorFirstName" label="First Name" required error={fieldErrors.sponsorFirstName}>
+              <input id="sponsorFirstName" name="sponsorFirstName" type="text" onChange={() => clearError("sponsorFirstName")} />
             </Field>
-            <Field id="sponsorLastName" label="Last Name" required>
-              <input id="sponsorLastName" name="sponsorLastName" type="text" required />
+            <Field id="sponsorLastName" label="Last Name" required error={fieldErrors.sponsorLastName}>
+              <input id="sponsorLastName" name="sponsorLastName" type="text" onChange={() => clearError("sponsorLastName")} />
             </Field>
           </div>
           <div className="grid grid-cols-2 gap-md">
-            <Field id="sponsorEmail" label="Email" required>
-              <input id="sponsorEmail" name="sponsorEmail" type="email" required />
+            <Field id="sponsorEmail" label="Email" required error={fieldErrors.sponsorEmail}>
+              <input id="sponsorEmail" name="sponsorEmail" type="email" onChange={() => clearError("sponsorEmail")} />
             </Field>
-            <Field id="sponsorPhone" label="Phone" required>
-              <input id="sponsorPhone" name="sponsorPhone" type="tel" required />
+            <Field id="sponsorPhone" label="Phone" required error={fieldErrors.sponsorPhone}>
+              <input id="sponsorPhone" name="sponsorPhone" type="tel" onChange={() => clearError("sponsorPhone")} />
             </Field>
           </div>
         </>
@@ -227,8 +280,8 @@ function BookAppointmentForm() {
         Event Info <span className="text-sm font-normal normal-case text-black/50">(required for quote/reservation)</span>
       </h4>
 
-      <Field id="address" label="Address" required>
-        <input id="address" name="address" type="text" required />
+      <Field id="address" label="Address" required error={fieldErrors.address}>
+        <input id="address" name="address" type="text" onChange={() => clearError("address")} />
       </Field>
 
       <Field id="address2" label="Address 2">
@@ -236,20 +289,20 @@ function BookAppointmentForm() {
       </Field>
 
       <div className="grid grid-cols-2 gap-md">
-        <Field id="city" label="City" required>
-          <input id="city" name="city" type="text" required />
+        <Field id="city" label="City" required error={fieldErrors.city}>
+          <input id="city" name="city" type="text" onChange={() => clearError("city")} />
         </Field>
-        <Field id="county" label="County" required>
-          <input id="county" name="county" type="text" required />
+        <Field id="county" label="County" required error={fieldErrors.county}>
+          <input id="county" name="county" type="text" onChange={() => clearError("county")} />
         </Field>
       </div>
 
-      <Field id="state" label="State" required>
-        <input id="state" name="state" type="text" required />
+      <Field id="state" label="State" required error={fieldErrors.state}>
+        <input id="state" name="state" type="text" onChange={() => clearError("state")} />
       </Field>
 
-      <Field id="eventType" label="Event Type" required>
-        <select id="eventType" name="eventType" required>
+      <Field id="eventType" label="Event Type" required error={fieldErrors.eventType}>
+        <select id="eventType" name="eventType" onChange={() => clearError("eventType")}>
           <option value="">Select an option</option>
           <option value="seahawks-party">Seahawks Party</option>
           <option value="birthday-party">Birthday Party</option>
@@ -265,31 +318,21 @@ function BookAppointmentForm() {
         </select>
       </Field>
 
-      <Field id="eventLength" label="Length of Event">
-        <select id="eventLength" name="eventLength">
-          <option value="">Select an option</option>
-          <option value="hourly-0-2">Hourly 0–2 Hours</option>
-          <option value="hourly-2-plus">2+ Hours</option>
-          <option value="full-day">Full Day (8 hours+)</option>
-          <option value="daily-1-3">Daily (1–3 Days)</option>
-        </select>
-      </Field>
-
       <div className="grid grid-cols-2 gap-md">
-        <Field id="eventStartDate" label="Event Start Date" required>
-          <input id="eventStartDate" name="eventStartDate" type="date" required />
+        <Field id="eventStartDate" label="Event Start Date" required error={fieldErrors.eventStartDate}>
+          <input id="eventStartDate" name="eventStartDate" type="date" onChange={() => clearError("eventStartDate")} />
         </Field>
-        <Field id="eventStartTime" label="Event Start Time" required>
-          <input id="eventStartTime" name="eventStartTime" type="time" required />
+        <Field id="eventStartTime" label="Event Start Time">
+          <input id="eventStartTime" name="eventStartTime" type="time" />
         </Field>
       </div>
 
       <div className="grid grid-cols-2 gap-md">
-        <Field id="eventEndDate" label="Event End Date" required>
-          <input id="eventEndDate" name="eventEndDate" type="date" required />
+        <Field id="eventEndDate" label="Event End Date" required error={fieldErrors.eventEndDate}>
+          <input id="eventEndDate" name="eventEndDate" type="date" onChange={() => clearError("eventEndDate")} />
         </Field>
-        <Field id="eventEndTime" label="Event End Time" required>
-          <input id="eventEndTime" name="eventEndTime" type="time" required />
+        <Field id="eventEndTime" label="Event End Time">
+          <input id="eventEndTime" name="eventEndTime" type="time" />
         </Field>
       </div>
 
