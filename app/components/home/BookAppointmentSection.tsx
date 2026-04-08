@@ -142,7 +142,7 @@ function BookAppointmentForm() {
   if (submitted) {
     return (
       <div className="bg-white/5 rounded-card p-lg text-center">
-        <p className="text-lg">Thank you! We'll be in touch to confirm your appointment.</p>
+        <p className="text-lg">Thank you! We'll be in touch to confirm your appearance.</p>
       </div>
     );
   }
@@ -345,7 +345,7 @@ export function BookAppointmentSection({ data }: Props) {
                   activeForm === "book" ? "text-white" : "text-black/60 hover:text-black"
                 }`}
               >
-                Book&nbsp;Appointment
+                Book&nbsp;Appearance
               </button>
             </div>
           </div>
