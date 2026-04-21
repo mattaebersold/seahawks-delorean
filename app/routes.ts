@@ -23,6 +23,7 @@ export default [
   // Resource routes
   ...prefix("resource", [
     route("preview", "./routes/resource/preview.ts"),
+    route("form-submit", "./routes/resource/form-submit.ts"),
     // Add other API type routes here
   ]),
 ] satisfies RouteConfig;

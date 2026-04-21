@@ -22,7 +22,7 @@ export default function FormBlock({
 
     try {
       const data = new FormData(e.currentTarget);
-      const res = await fetch("/", {
+      const res = await fetch("/resource/form-submit", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(data as any).toString(),

@@ -49,7 +49,7 @@ function ContactUsForm() {
     setError(false);
     try {
       const formData = new FormData(e.currentTarget);
-      const res = await fetch("/", {
+      const res = await fetch("/resource/form-submit", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),
@@ -178,7 +178,7 @@ function BookAppointmentForm() {
     setLoading(true);
     setError(false);
     try {
-      const res = await fetch("/", {
+      const res = await fetch("/resource/form-submit", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),
