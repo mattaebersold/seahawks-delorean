@@ -16,6 +16,12 @@ import { SECTION_IDS } from "~/types/homeTypes";
 import type { HomePage } from "~/types/homeTypes";
 import type { Route } from "./+types/home";
 
+export async function action() {
+  // Netlify Forms intercepts this POST at the CDN before it reaches here.
+  // Returning 200 lets the client-side fetch resolve successfully.
+  return { ok: true };
+}
+
 export async function loader({ request }: Route.LoaderArgs) {
   const { options } = await loadQueryOptions(request.headers);
   const query = HOME_PAGE_QUERY;
