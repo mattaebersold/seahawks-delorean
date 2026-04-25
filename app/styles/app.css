@@ -104,6 +104,12 @@ select {
   @apply bg-white border-1 border-black p-2 rounded-md my-2;
 }
 
+.field-error input,
+.field-error textarea,
+.field-error select {
+  @apply !border-red;
+}
+
 label {
   @apply font-bold text-sm uppercase block;
 }
