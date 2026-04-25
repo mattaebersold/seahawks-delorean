@@ -8,7 +8,7 @@
       otherwise invisible to Netlify because they're client-side rendered.
     -->
 
-    <!-- Contact Us form (BookAppointmentSection.tsx → ContactUsForm) -->
+    <!-- Contact Us form -->
     <form name="contact-us" data-netlify="true" hidden>
       <input type="hidden" name="form-name" value="contact-us" />
       <input name="firstName" type="text" />
@@ -18,10 +18,42 @@
       <textarea name="message"></textarea>
     </form>
 
-    <!-- Book Appointment form (BookAppointmentSection.tsx → BookAppointmentForm) -->
-    <form name="book-appointment" data-netlify="true" hidden>
-      <input type="hidden" name="form-name" value="book-appointment" />
-      <input name="bookingType" type="text" />
+    <!-- Book / Price — Private Activity -->
+    <form name="book-private" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="book-private" />
+      <input name="firstName" type="text" />
+      <input name="lastName" type="text" />
+      <input name="email" type="email" />
+      <input name="phone" type="tel" />
+      <input name="subject" type="text" />
+      <textarea name="message"></textarea>
+      <input name="address" type="text" />
+      <input name="address2" type="text" />
+      <input name="city" type="text" />
+      <input name="county" type="text" />
+      <input name="state" type="text" />
+      <select name="eventType">
+        <option value="seahawks-party">Seahawks Party</option>
+        <option value="birthday-party">Birthday Party</option>
+        <option value="tailgate-party">Tailgate Party</option>
+        <option value="sports-event">Sports Event</option>
+        <option value="music-video">Music Video</option>
+        <option value="graduation">Graduation</option>
+        <option value="photo-shoot">Photo Shoot</option>
+        <option value="video-promotion">Video Promotion</option>
+        <option value="convention">Convention</option>
+        <option value="charity-event">Charity Event</option>
+        <option value="other">Other</option>
+      </select>
+      <input name="eventStartDate" type="date" />
+      <input name="eventStartTime" type="time" />
+      <input name="eventEndDate" type="date" />
+      <input name="eventEndTime" type="time" />
+    </form>
+
+    <!-- Book / Price — Public Event with Sponsor -->
+    <form name="book-public" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="book-public" />
       <input name="firstName" type="text" />
       <input name="lastName" type="text" />
       <input name="email" type="email" />

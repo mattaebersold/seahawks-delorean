@@ -4,8 +4,9 @@ import Button from "~/components/global/Button";
 import type { BookSection as BookSectionType } from "~/types/homeTypes";
 import { SECTION_IDS } from "~/types/homeTypes";
 
-const BOOK_FORM_NAME = "book-appointment";
 const CONTACT_FORM_NAME = "contact-us";
+const BOOK_PRIVATE_FORM_NAME = "book-private";
+const BOOK_PUBLIC_FORM_NAME = "book-public";
 
 type ActiveForm = "contact" | "private" | "public";
 
@@ -324,14 +325,17 @@ function BookAppointmentForm({ formType }: { formType: "private" | "public" }) {
 
   return (
     <form
-      name={BOOK_FORM_NAME}
+      name={formType === "private" ? BOOK_PRIVATE_FORM_NAME : BOOK_PUBLIC_FORM_NAME}
       method="POST"
       data-netlify="true"
       onSubmit={handleSubmit}
       className="flex flex-col gap-sm"
     >
-      <input type="hidden" name="form-name" value={BOOK_FORM_NAME} />
-      <input type="hidden" name="bookingType" value={formType} />
+      <input
+        type="hidden"
+        name="form-name"
+        value={formType === "private" ? BOOK_PRIVATE_FORM_NAME : BOOK_PUBLIC_FORM_NAME}
+      />
 
       {/* ── YOUR CONTACT INFO ── */}
       <h4 className="uppercase tracking-wide border-b border-black/20 pb-sm">
