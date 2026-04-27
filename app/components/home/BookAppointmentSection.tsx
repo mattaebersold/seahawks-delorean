@@ -56,14 +56,19 @@ function Modal({
     };
     document.addEventListener("keydown", handleKey);
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
       <div className="relative bg-bg rounded-card w-full max-w-[700px] max-h-[90vh] overflow-y-auto p-lg shadow-xl">
         <button
           type="button"
