@@ -63,18 +63,13 @@ function Modal({
   }, [onClose]);
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 p-4 overflow-y-auto"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div className="relative bg-bg rounded-card w-full max-w-[700px] my-8 p-lg shadow-xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+      <div className="relative bg-bg rounded-card w-full max-w-[700px] max-h-[90vh] overflow-y-auto p-lg shadow-xl">
         <button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-4 right-4 text-black/50 hover:text-black text-xl leading-none w-9 h-9 flex items-center justify-center rounded-full hover:bg-black/10 transition"
+          className="sticky top-0 float-right text-black/50 hover:text-black text-xl leading-none w-9 h-9 flex items-center justify-center rounded-full hover:bg-black/10 transition"
         >
           ✕
         </button>
@@ -90,7 +85,15 @@ function Modal({
   );
 }
 
-function ContactUsForm() {
+function ContactUsForm({
+  values,
+  onChange,
+  onSubmitSuccess,
+}: {
+  values: Record<string, string>;
+  onChange: (name: string, value: string) => void;
+  onSubmitSuccess: () => void;
+}) {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -98,12 +101,13 @@ function ContactUsForm() {
 
   function clearError(name: string) {
     if (fieldErrors[name]) {
-      setFieldErrors((prev) => {
-        const next = { ...prev };
-        delete next[name];
-        return next;
-      });
+      setFieldErrors((prev) => { const next = { ...prev }; delete next[name]; return next; });
     }
+  }
+
+  function handleChange(name: string, value: string) {
+    onChange(name, value);
+    clearError(name);
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -126,10 +130,7 @@ function ContactUsForm() {
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       setTimeout(() => {
-        document.getElementById(Object.keys(errors)[0])?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        document.getElementById(Object.keys(errors)[0])?.scrollIntoView({ behavior: "smooth", block: "center" });
       }, 50);
       return;
     }
@@ -145,6 +146,7 @@ function ContactUsForm() {
       });
       if (!res.ok) throw new Error("Non-OK response");
       setSubmitted(true);
+      onSubmitSuccess();
     } catch {
       setSubmitError(true);
     } finally {
@@ -173,18 +175,16 @@ function ContactUsForm() {
       <div className="grid grid-cols-2 gap-md">
         <Field id="firstName" label="First Name" required error={fieldErrors.firstName}>
           <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            onChange={() => clearError("firstName")}
+            id="firstName" name="firstName" type="text"
+            value={values.firstName ?? ""}
+            onChange={(e) => handleChange("firstName", e.target.value)}
           />
         </Field>
         <Field id="lastName" label="Last Name" required error={fieldErrors.lastName}>
           <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            onChange={() => clearError("lastName")}
+            id="lastName" name="lastName" type="text"
+            value={values.lastName ?? ""}
+            onChange={(e) => handleChange("lastName", e.target.value)}
           />
         </Field>
       </div>
@@ -192,29 +192,25 @@ function ContactUsForm() {
       <div className="grid grid-cols-2 gap-md">
         <Field id="email" label="Email" required error={fieldErrors.email}>
           <input
-            id="email"
-            name="email"
-            type="email"
-            onChange={() => clearError("email")}
+            id="email" name="email" type="email"
+            value={values.email ?? ""}
+            onChange={(e) => handleChange("email", e.target.value)}
           />
         </Field>
         <Field id="phone" label="Phone" required error={fieldErrors.phone}>
           <input
-            id="phone"
-            name="phone"
-            type="tel"
-            onChange={() => clearError("phone")}
+            id="phone" name="phone" type="tel"
+            value={values.phone ?? ""}
+            onChange={(e) => handleChange("phone", e.target.value)}
           />
         </Field>
       </div>
 
       <Field id="message" label="Message" required error={fieldErrors.message}>
         <textarea
-          id="message"
-          name="message"
-          rows={4}
-          className="resize-y"
-          onChange={() => clearError("message")}
+          id="message" name="message" rows={4} className="resize-y"
+          value={values.message ?? ""}
+          onChange={(e) => handleChange("message", e.target.value)}
         />
       </Field>
 
@@ -236,15 +232,14 @@ const BASE_REQUIRED: Record<string, string> = {
   lastName: "Last Name is required",
   email: "Email is required",
   phone: "Phone is required",
-  subject: "Subject is required",
-  message: "Message is required",
+  eventType: "Event Type is required",
   address: "Address is required",
   city: "City is required",
   county: "County is required",
   state: "State is required",
-  eventType: "Event Type is required",
   eventStartDate: "Event Start Date is required",
   eventEndDate: "Event End Date is required",
+  additionalInfo: "Additional Info is required",
 };
 
 const SPONSOR_REQUIRED: Record<string, string> = {
@@ -254,20 +249,33 @@ const SPONSOR_REQUIRED: Record<string, string> = {
   sponsorPhone: "Sponsor Phone is required",
 };
 
-function BookAppointmentForm({ formType }: { formType: "private" | "public" }) {
+function BookAppointmentForm({
+  formType,
+  values,
+  onChange,
+  onSubmitSuccess,
+}: {
+  formType: "private" | "public";
+  values: Record<string, string>;
+  onChange: (name: string, value: string) => void;
+  onSubmitSuccess: () => void;
+}) {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
+  const formName = formType === "private" ? BOOK_PRIVATE_FORM_NAME : BOOK_PUBLIC_FORM_NAME;
+
   function clearError(name: string) {
     if (fieldErrors[name]) {
-      setFieldErrors((prev) => {
-        const next = { ...prev };
-        delete next[name];
-        return next;
-      });
+      setFieldErrors((prev) => { const next = { ...prev }; delete next[name]; return next; });
     }
+  }
+
+  function handleChange(name: string, value: string) {
+    onChange(name, value);
+    clearError(name);
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -275,10 +283,9 @@ function BookAppointmentForm({ formType }: { formType: "private" | "public" }) {
     const formData = new FormData(e.currentTarget);
     const errors: Record<string, string> = {};
 
-    const required =
-      formType === "public"
-        ? { ...BASE_REQUIRED, ...SPONSOR_REQUIRED }
-        : BASE_REQUIRED;
+    const required = formType === "public"
+      ? { ...BASE_REQUIRED, ...SPONSOR_REQUIRED }
+      : BASE_REQUIRED;
 
     for (const [field, message] of Object.entries(required)) {
       if (!formData.get(field)?.toString().trim()) {
@@ -289,10 +296,7 @@ function BookAppointmentForm({ formType }: { formType: "private" | "public" }) {
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       setTimeout(() => {
-        document.getElementById(Object.keys(errors)[0])?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        document.getElementById(Object.keys(errors)[0])?.scrollIntoView({ behavior: "smooth", block: "center" });
       }, 50);
       return;
     }
@@ -308,6 +312,7 @@ function BookAppointmentForm({ formType }: { formType: "private" | "public" }) {
       });
       if (!res.ok) throw new Error("Non-OK response");
       setSubmitted(true);
+      onSubmitSuccess();
     } catch {
       setSubmitError(true);
     } finally {
@@ -325,17 +330,13 @@ function BookAppointmentForm({ formType }: { formType: "private" | "public" }) {
 
   return (
     <form
-      name={formType === "private" ? BOOK_PRIVATE_FORM_NAME : BOOK_PUBLIC_FORM_NAME}
+      name={formName}
       method="POST"
       data-netlify="true"
       onSubmit={handleSubmit}
       className="flex flex-col gap-sm"
     >
-      <input
-        type="hidden"
-        name="form-name"
-        value={formType === "private" ? BOOK_PRIVATE_FORM_NAME : BOOK_PUBLIC_FORM_NAME}
-      />
+      <input type="hidden" name="form-name" value={formName} />
 
       {/* ── YOUR CONTACT INFO ── */}
       <h4 className="uppercase tracking-wide border-b border-black/20 pb-sm">
@@ -345,18 +346,16 @@ function BookAppointmentForm({ formType }: { formType: "private" | "public" }) {
       <div className="grid grid-cols-2 gap-md">
         <Field id="firstName" label="First Name" required error={fieldErrors.firstName}>
           <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            onChange={() => clearError("firstName")}
+            id="firstName" name="firstName" type="text"
+            value={values.firstName ?? ""}
+            onChange={(e) => handleChange("firstName", e.target.value)}
           />
         </Field>
         <Field id="lastName" label="Last Name" required error={fieldErrors.lastName}>
           <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            onChange={() => clearError("lastName")}
+            id="lastName" name="lastName" type="text"
+            value={values.lastName ?? ""}
+            onChange={(e) => handleChange("lastName", e.target.value)}
           />
         </Field>
       </div>
@@ -364,92 +363,30 @@ function BookAppointmentForm({ formType }: { formType: "private" | "public" }) {
       <div className="grid grid-cols-2 gap-md">
         <Field id="email" label="Email" required error={fieldErrors.email}>
           <input
-            id="email"
-            name="email"
-            type="email"
-            onChange={() => clearError("email")}
+            id="email" name="email" type="email"
+            value={values.email ?? ""}
+            onChange={(e) => handleChange("email", e.target.value)}
           />
         </Field>
         <Field id="phone" label="Phone" required error={fieldErrors.phone}>
           <input
-            id="phone"
-            name="phone"
-            type="tel"
-            onChange={() => clearError("phone")}
+            id="phone" name="phone" type="tel"
+            value={values.phone ?? ""}
+            onChange={(e) => handleChange("phone", e.target.value)}
           />
         </Field>
       </div>
-
-      <Field id="subject" label="Subject" required error={fieldErrors.subject}>
-        <input
-          id="subject"
-          name="subject"
-          type="text"
-          onChange={() => clearError("subject")}
-        />
-      </Field>
-
-      <Field id="message" label="Message" required error={fieldErrors.message}>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          className="resize-y"
-          onChange={() => clearError("message")}
-        />
-      </Field>
 
       {/* ── EVENT INFO ── */}
       <h4 className="uppercase tracking-wide border-b border-black/20 pb-sm mt-sm">
         Event Info
       </h4>
 
-      <Field id="address" label="Address" required error={fieldErrors.address}>
-        <input
-          id="address"
-          name="address"
-          type="text"
-          onChange={() => clearError("address")}
-        />
-      </Field>
-
-      <Field id="address2" label="Address 2">
-        <input id="address2" name="address2" type="text" />
-      </Field>
-
-      <div className="grid grid-cols-2 gap-md">
-        <Field id="city" label="City" required error={fieldErrors.city}>
-          <input
-            id="city"
-            name="city"
-            type="text"
-            onChange={() => clearError("city")}
-          />
-        </Field>
-        <Field id="county" label="County" required error={fieldErrors.county}>
-          <input
-            id="county"
-            name="county"
-            type="text"
-            onChange={() => clearError("county")}
-          />
-        </Field>
-      </div>
-
-      <Field id="state" label="State" required error={fieldErrors.state}>
-        <input
-          id="state"
-          name="state"
-          type="text"
-          onChange={() => clearError("state")}
-        />
-      </Field>
-
       <Field id="eventType" label="Event Type" required error={fieldErrors.eventType}>
         <select
-          id="eventType"
-          name="eventType"
-          onChange={() => clearError("eventType")}
+          id="eventType" name="eventType"
+          value={values.eventType ?? ""}
+          onChange={(e) => handleChange("eventType", e.target.value)}
         >
           <option value="">Select an option</option>
           <option value="seahawks-party">Seahawks Party</option>
@@ -466,43 +403,88 @@ function BookAppointmentForm({ formType }: { formType: "private" | "public" }) {
         </select>
       </Field>
 
+      <Field id="address" label="Address" required error={fieldErrors.address}>
+        <input
+          id="address" name="address" type="text"
+          value={values.address ?? ""}
+          onChange={(e) => handleChange("address", e.target.value)}
+        />
+      </Field>
+
+      <Field id="address2" label="Address 2">
+        <input
+          id="address2" name="address2" type="text"
+          value={values.address2 ?? ""}
+          onChange={(e) => handleChange("address2", e.target.value)}
+        />
+      </Field>
+
       <div className="grid grid-cols-2 gap-md">
-        <Field
-          id="eventStartDate"
-          label="Event Start Date"
-          required
-          error={fieldErrors.eventStartDate}
-        >
+        <Field id="city" label="City" required error={fieldErrors.city}>
           <input
-            id="eventStartDate"
-            name="eventStartDate"
-            type="date"
-            onChange={() => clearError("eventStartDate")}
+            id="city" name="city" type="text"
+            value={values.city ?? ""}
+            onChange={(e) => handleChange("city", e.target.value)}
+          />
+        </Field>
+        <Field id="county" label="County" required error={fieldErrors.county}>
+          <input
+            id="county" name="county" type="text"
+            value={values.county ?? ""}
+            onChange={(e) => handleChange("county", e.target.value)}
+          />
+        </Field>
+      </div>
+
+      <Field id="state" label="State" required error={fieldErrors.state}>
+        <input
+          id="state" name="state" type="text"
+          value={values.state ?? ""}
+          onChange={(e) => handleChange("state", e.target.value)}
+        />
+      </Field>
+
+      <div className="grid grid-cols-2 gap-md">
+        <Field id="eventStartDate" label="Event Start Date" required error={fieldErrors.eventStartDate}>
+          <input
+            id="eventStartDate" name="eventStartDate" type="date"
+            value={values.eventStartDate ?? ""}
+            onChange={(e) => handleChange("eventStartDate", e.target.value)}
           />
         </Field>
         <Field id="eventStartTime" label="Event Start Time">
-          <input id="eventStartTime" name="eventStartTime" type="time" />
+          <input
+            id="eventStartTime" name="eventStartTime" type="time"
+            value={values.eventStartTime ?? ""}
+            onChange={(e) => handleChange("eventStartTime", e.target.value)}
+          />
         </Field>
       </div>
 
       <div className="grid grid-cols-2 gap-md">
-        <Field
-          id="eventEndDate"
-          label="Event End Date"
-          required
-          error={fieldErrors.eventEndDate}
-        >
+        <Field id="eventEndDate" label="Event End Date" required error={fieldErrors.eventEndDate}>
           <input
-            id="eventEndDate"
-            name="eventEndDate"
-            type="date"
-            onChange={() => clearError("eventEndDate")}
+            id="eventEndDate" name="eventEndDate" type="date"
+            value={values.eventEndDate ?? ""}
+            onChange={(e) => handleChange("eventEndDate", e.target.value)}
           />
         </Field>
         <Field id="eventEndTime" label="Event End Time">
-          <input id="eventEndTime" name="eventEndTime" type="time" />
+          <input
+            id="eventEndTime" name="eventEndTime" type="time"
+            value={values.eventEndTime ?? ""}
+            onChange={(e) => handleChange("eventEndTime", e.target.value)}
+          />
         </Field>
       </div>
+
+      <Field id="additionalInfo" label="Additional Info" required error={fieldErrors.additionalInfo}>
+        <textarea
+          id="additionalInfo" name="additionalInfo" rows={4} className="resize-y"
+          value={values.additionalInfo ?? ""}
+          onChange={(e) => handleChange("additionalInfo", e.target.value)}
+        />
+      </Field>
 
       {/* ── EVENT SPONSOR CONTACT INFO (public events only) ── */}
       {formType === "public" && (
@@ -511,64 +493,44 @@ function BookAppointmentForm({ formType }: { formType: "private" | "public" }) {
             Event Sponsor Contact Info
           </h4>
 
-          <Field id="sponsorOrgName" label="Organization / Sponsor Name">
-            <input id="sponsorOrgName" name="sponsorOrgName" type="text" />
+          <Field id="sponsorOrgName" label="Name of Sponsoring Organization">
+            <input
+              id="sponsorOrgName" name="sponsorOrgName" type="text"
+              value={values.sponsorOrgName ?? ""}
+              onChange={(e) => handleChange("sponsorOrgName", e.target.value)}
+            />
           </Field>
 
           <div className="grid grid-cols-2 gap-md">
-            <Field
-              id="sponsorFirstName"
-              label="First Name"
-              required
-              error={fieldErrors.sponsorFirstName}
-            >
+            <Field id="sponsorFirstName" label="First Name" required error={fieldErrors.sponsorFirstName}>
               <input
-                id="sponsorFirstName"
-                name="sponsorFirstName"
-                type="text"
-                onChange={() => clearError("sponsorFirstName")}
+                id="sponsorFirstName" name="sponsorFirstName" type="text"
+                value={values.sponsorFirstName ?? ""}
+                onChange={(e) => handleChange("sponsorFirstName", e.target.value)}
               />
             </Field>
-            <Field
-              id="sponsorLastName"
-              label="Last Name"
-              required
-              error={fieldErrors.sponsorLastName}
-            >
+            <Field id="sponsorLastName" label="Last Name" required error={fieldErrors.sponsorLastName}>
               <input
-                id="sponsorLastName"
-                name="sponsorLastName"
-                type="text"
-                onChange={() => clearError("sponsorLastName")}
+                id="sponsorLastName" name="sponsorLastName" type="text"
+                value={values.sponsorLastName ?? ""}
+                onChange={(e) => handleChange("sponsorLastName", e.target.value)}
               />
             </Field>
           </div>
 
           <div className="grid grid-cols-2 gap-md">
-            <Field
-              id="sponsorEmail"
-              label="Email"
-              required
-              error={fieldErrors.sponsorEmail}
-            >
+            <Field id="sponsorEmail" label="Email" required error={fieldErrors.sponsorEmail}>
               <input
-                id="sponsorEmail"
-                name="sponsorEmail"
-                type="email"
-                onChange={() => clearError("sponsorEmail")}
+                id="sponsorEmail" name="sponsorEmail" type="email"
+                value={values.sponsorEmail ?? ""}
+                onChange={(e) => handleChange("sponsorEmail", e.target.value)}
               />
             </Field>
-            <Field
-              id="sponsorPhone"
-              label="Phone"
-              required
-              error={fieldErrors.sponsorPhone}
-            >
+            <Field id="sponsorPhone" label="Phone" required error={fieldErrors.sponsorPhone}>
               <input
-                id="sponsorPhone"
-                name="sponsorPhone"
-                type="tel"
-                onChange={() => clearError("sponsorPhone")}
+                id="sponsorPhone" name="sponsorPhone" type="tel"
+                value={values.sponsorPhone ?? ""}
+                onChange={(e) => handleChange("sponsorPhone", e.target.value)}
               />
             </Field>
           </div>
@@ -614,6 +576,22 @@ const MODAL_CONFIG: Record<ActiveForm, { title: string; subtitle: string }> = {
 
 export function BookAppointmentSection({ data }: Props) {
   const [activeForm, setActiveForm] = useState<ActiveForm | null>(null);
+  const [formValues, setFormValues] = useState<Record<ActiveForm, Record<string, string>>>({
+    contact: {},
+    private: {},
+    public: {},
+  });
+
+  function handleFieldChange(form: ActiveForm, name: string, value: string) {
+    setFormValues((prev) => ({
+      ...prev,
+      [form]: { ...prev[form], [name]: value },
+    }));
+  }
+
+  function resetFormValues(form: ActiveForm) {
+    setFormValues((prev) => ({ ...prev, [form]: {} }));
+  }
 
   return (
     <section id={SECTION_IDS.book} className="py-xl">
@@ -656,9 +634,18 @@ export function BookAppointmentSection({ data }: Props) {
           onClose={() => setActiveForm(null)}
         >
           {activeForm === "contact" ? (
-            <ContactUsForm />
+            <ContactUsForm
+              values={formValues.contact}
+              onChange={(n, v) => handleFieldChange("contact", n, v)}
+              onSubmitSuccess={() => resetFormValues("contact")}
+            />
           ) : (
-            <BookAppointmentForm formType={activeForm} />
+            <BookAppointmentForm
+              formType={activeForm}
+              values={formValues[activeForm]}
+              onChange={(n, v) => handleFieldChange(activeForm, n, v)}
+              onSubmitSuccess={() => resetFormValues(activeForm)}
+            />
           )}
         </Modal>
       )}
